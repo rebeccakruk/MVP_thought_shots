@@ -1,31 +1,38 @@
 <template>
     <div>
-    <v-btn @click="login()"><router-link to="/login">User Login</router-link></v-btn>
+        <v-form>
+        <v-text-field v-model="formData.username" label="Please enter your username" type="input" class="rounded-0" outlined></v-text-field>
+        <v-text-field v-model="formData.password" label="Please enter your password" type="password" class="rounded-0" outlined></v-text-field>
+        <v-btn @click="login()"><router-view to="/">Login</router-view></v-btn>
+            </v-form>
     </div>
 </template>
 
 <script>
+import router from '@/router';
 import axios from 'axios';
-// import cookies from 'vue-cookies'
+import cookies from 'vue-cookies'
     export default {
         name: "userLogin",
         data() {
             return {
-                username: "",
-                password: ""
+                formData: {
+                    username: "",
+                    password: ""
+                }
             }
         },
         methods: {
             login() {
-                axios.request({
-                    url: `${process.env.VUE_APP_BASE_DOMAIN}/api/user`,
-                    method: `POST`,
-                    data: {
-                        username: this.username,
-                        password: this.password
-                    }
-                }).then((response) =>{
-                    console.log(response);
+                axios.post(
+                    process.env.VUE_APP_BASE_DOMAIN + `/api/user-login`,
+                    this.formData
+                ).then((response) =>{
+                    let token = response.data.token
+                    let id = response.data.userId
+                    cookies.set('token', token)
+                    cookies.set('userId', id)
+                    router.push('/userprofile')
                 }).catch((error) => {
                     console.log(error);
                 })
