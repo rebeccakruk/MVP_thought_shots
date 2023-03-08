@@ -1,41 +1,117 @@
 <template>
-    <div>
-        <v-text-field :readonly="isEditing"></v-text-field>
-            <v-btn @click="isEditing = !isEditing">
-                <v-icon>mdi-pencil</v-icon>
+    <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+        <v-container>
+            <v-layout wrap>
+                <v-flex sm12 md6 offset-md3>
+                    <v-card elevation="4" light tag="section">
+                        <v-card-title>
+                            <v-layout align-center justify-space-between>
+                                <h3 class="headline">
+                                    {{ userInfo.username }}
+                                </h3>
+
+            </v-layout>
+            
+            </v-card-title>
+                <v-divider></v-divider>
+                    <v-card-text>
+                        <v-layout align-center justify-space-between>
+                        <p>View / Edit Profile:</p>
+                                                    <v-btn
+            class="ml-3"
+            :color="toggleDisable ? 'primary' : ''"
+            @click="toggleDisable = !toggleDisable"
+            >
+            Edit User Info
             </v-btn>
-                <v-btn @click="isEditing = true" color="primary" v-if="isEditing" text>Submit</v-btn>
-        <div class="profileDiv" v-if="isEditing">
-            <v-text-field v-model="userInfo.username" label="username"></v-text-field>
-            <v-text-field v-model="userInfo.email" label="email"></v-text-field>
-            <v-text-field v-model="userInfo.image" label="image"></v-text-field>
-            <v-text-field v-model="userInfo.dob" label="dob"></v-text-field>
-        <v-img :src="userInfo.image"></v-img>
-        <h2>
-            {{ userInfo.username }}
-        </h2>
-        {{ userInfo.email }}
-        {{ userInfo.created_at }}
-        </div>
-        <div class="editDiv" v-if="isEditing">
-        <UserEdit :username="userInfo.username" :email="userInfo.email" />
-        </div>
-    
-    </div>
+                                                    </v-layout>
+                            <v-form>
+
+                                <v-text-field 
+                                            v-model="userInfo.username"
+                                            :disabled="!toggleDisable"
+                                            label="Username"
+                                            :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                            ></v-text-field>
+                                <v-text-field 
+                                            v-model="userInfo.email"
+                                            :disabled="!toggleDisable"
+                                            label="email"
+                                            :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                            ></v-text-field>
+
+                                            <v-text-field 
+                                                v-model="userInfo.dob"
+                                                :disabled="!toggleDisable"
+                                                label="Birthday YYYY-MM-DD"
+                                                :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                                ></v-text-field>
+
+                                                <v-text-field 
+                                                v-model="userInfo.image"
+                                                :disabled="!toggleDisable"
+                                                label="image"
+                                                :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                                ></v-text-field>
+<!-- 
+                                <v-text-field
+                                            outline
+                                            label="Birthday YYYY-MM-DD"
+                                            :rules="[rules.required]"
+                                            type="text"
+                                            :append-icon="isEditing ? 'mdi-pencil'" 
+                                            v-model="formData.username"></v-text-field>
+                
+                                <v-text-field
+                                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                                        :rules="[rules.required, rules.emailMatch]"
+                                        :type="showPassword ? 'text' : 'password'"
+                                        label="Password"
+                                        @click:append="showPassword = !showPassword"
+                                        outline
+                                        hide-details
+                                        v-model="formData.password"></v-text-field>    -->
+                            </v-form>
+                    </v-card-text>
+                <v-divider></v-divider>
+                        <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
+                                <v-btn color="info" text>
+                                    Forgot password?
+                                </v-btn>
+                    <v-spacer></v-spacer>
+                                <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchInfo()"><router-view to="/"></router-view>
+                                    Submit
+                                </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+                    <v-flex sm12 md6 offset-md3>
+                        <v-layout align-center justify-space-between>
+                        </v-layout>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </v-app>
 </template>
 
 <script>
 import axios from 'axios'
 import cookies from 'vue-cookies'
-import UserEdit from '@/components/UserEdit.vue'
+
 
     export default {
         name: "UserProfile",
         components: {
-            UserEdit
+
         },
         data() {
             return {
+                rules: {
+                    required: value => !!value || 'Required.',
+                    emailMatch: () => ('The email and password you entered don\'t match')
+            },
+            showPassword: false,
+            darkTheme: true,
                 userInfo : [],
                 formData: {
                     email: "",
@@ -45,7 +121,10 @@ import UserEdit from '@/components/UserEdit.vue'
                     image: "",
                 },
                 token: "",
-                isEditing: false
+                isEditing: false,
+                platformName: 'User Profile',
+                toggleDisable: false,
+                toggleClass: true
             }
         },
         methods: {
@@ -79,6 +158,11 @@ import UserEdit from '@/components/UserEdit.vue'
         },
         mounted () {
             this.getInfo();
+            this.formData = this.email;
+            this.formData = this.username;
+            this.formData = this.image;
+            this.formData = this.password;
+            this.formData = this.dob;
         },
     }
 </script>
