@@ -1,13 +1,15 @@
 <template>
     <div>
-        HELLO HOW GOOD TO SEE YOU DAWLINGS
-        <v-btn @click="logout()"><router-link to="/logout">Logout</router-link></v-btn>
         <v-text-field :readonly="isEditing"></v-text-field>
             <v-btn @click="isEditing = !isEditing">
                 <v-icon>mdi-pencil</v-icon>
             </v-btn>
                 <v-btn @click="isEditing = true" color="primary" v-if="isEditing" text>Submit</v-btn>
-        <div class="profileDiv" v-if="!isEditing">
+        <div class="profileDiv" v-if="isEditing">
+            <v-text-field v-model="userInfo.username" label="username"></v-text-field>
+            <v-text-field v-model="userInfo.email" label="email"></v-text-field>
+            <v-text-field v-model="userInfo.image" label="image"></v-text-field>
+            <v-text-field v-model="userInfo.dob" label="dob"></v-text-field>
         <v-img :src="userInfo.image"></v-img>
         <h2>
             {{ userInfo.username }}
@@ -41,9 +43,9 @@ import UserEdit from '@/components/UserEdit.vue'
                     password: "",
                     dob: Date,
                     image: "",
-                    isEditing: false
                 },
-                token: ""
+                token: "",
+                isEditing: false
             }
         },
         methods: {
@@ -63,7 +65,7 @@ import UserEdit from '@/components/UserEdit.vue'
             },
             patchInfo() {
                 axios.patch(
-                    process.env.VUE_APP_BASE_DOMAIN + 'user',
+                    process.env.VUE_APP_BASE_DOMAIN + '/api/user',
                     this.formData
                 ).then((response) => {
                     console.log(response);
@@ -76,7 +78,7 @@ import UserEdit from '@/components/UserEdit.vue'
             this.token = cookies.get('token');
         },
         mounted () {
-            this.getInfo(this.token);
+            this.getInfo();
         },
     }
 </script>
@@ -88,3 +90,5 @@ import UserEdit from '@/components/UserEdit.vue'
 <!-- please work on frontend and backend in parallel
 a state manager is a function
 in additional helper file, valid when there's a need to kick the user to the main page, not logged in. -->
+
+<!-- first do the testing through Postman, and it allows you to check if it's working properly -->

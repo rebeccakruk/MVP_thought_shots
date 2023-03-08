@@ -17,7 +17,6 @@ import axios from 'axios'
             "password" : undefined,
             "image" : String,
             "username" : String,
-            "createdAt" : Date,
             "dob" : Date
         },
         methods: {
@@ -33,7 +32,7 @@ import axios from 'axios'
             }
         },  
         mounted () {
-            this.formData.username = this.name;
+            this.formData.username = this.username;
             this.formData.email = this.email;
             this.formData.image = this.image;
             this.formData.dob = this.dob;

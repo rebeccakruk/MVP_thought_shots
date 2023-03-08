@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-form>
-            <v-btn @click="logout()"><router-view to="/">Logout</router-view></v-btn>
+            <v-btn @click="logout()"><router-view to="/"></router-view>Logout</v-btn>
         </v-form>
     </div>
 </template>
@@ -13,24 +13,30 @@ export default {
     name: "UserLogout",
     data() {
         return {
-            formData: {
-                token: ""
-            }
+                token: "",
+                userId: ""
         }
     },
     methods: {
-        login() {
+        logout() {
             axios.delete(
                 process.env.VUE_APP_BASE_DOMAIN + `/api/user-login`,
-                this.formData
+                this.token
             ).then(() => {
             }).catch((error) => {
                 console.log(error);
             })
+            cookies.remove('token')
+            cookies.remove('userId')
         }
     }, 
     beforeMount() {
         this.token = cookies.get('token');
+        this.userId = cookies.get('userId');
+    },
+    mounted () {
+        console.log(this.token);
+        console.log(this.userId);
     },
 }
 </script>
