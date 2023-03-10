@@ -15,71 +15,67 @@
             </v-card-title>
                 <v-divider></v-divider>
                     <v-card-text>
-                        <v-layout align-center justify-space-between>
-                        <p>View / Edit Profile:</p>
-                                                    <v-btn
-            class="ml-3"
-            :color="toggleDisable ? 'primary' : ''"
-            @click="toggleDisable = !toggleDisable"
-            >
-            Edit User Info
-            </v-btn>
-                                                    </v-layout>
-                            <v-form>
-
-                                <v-text-field 
-                                            v-model="userInfo.username"
-                                            :disabled="!toggleDisable"
-                                            label="Username"
-                                            :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
-                                            ></v-text-field>
+                            
+                        <v-form>
                                 <v-text-field 
                                             v-model="userInfo.email"
-                                            :disabled="!toggleDisable"
+                                            :disabled="!toggleDisable1"
                                             label="email"
-                                            :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                            :append-icon="!toggleDisable1 ? ' ' : 'mdi-pencil'"
                                             ></v-text-field>
-
+                            <v-layout align-center justify-space-between>
+                                    <v-btn
+                                        class="ml-3"
+                                        x-small
+                                        :color="toggleDisable1 ? 'primary' : ''"
+                                        :append-icon="!toggleDisable1 ? ' ' : 'mdi-pencil'"
+                                        @click="toggleDisable1 = !toggleDisable1"
+                                        >
+                                        Edit email
+                                    </v-btn>
+                                        </v-layout>
                                             <v-text-field 
-                                                v-model="userInfo.dob"
-                                                :disabled="!toggleDisable"
-                                                label="Birthday YYYY-MM-DD"
-                                                :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                                v-model="userInfo.lastName"
+                                                :disabled="!toggleDisable2"
+                                                label="last name"
+                                                :append-icon="!toggleDisable2 ? ' ' : 'mdi-pencil'"
                                                 ></v-text-field>
-
+                                                <v-layout align-center justify-space-between>
+                                        <v-btn
+                                            class="ml-3"
+                                            x-small
+                                            :color="toggleDisable2 ? 'primary' : ''"
+                                            :append-icon="!toggleDisable2 ? ' ' : 'mdi-pencil'"
+                                            @click="toggleDisable2 = !toggleDisable2"
+                                            >
+                                            Edit last name
+                                        </v-btn>         
+                                        </v-layout>
                                                 <v-text-field 
                                                 v-model="userInfo.image"
-                                                :disabled="!toggleDisable"
+                                                :disabled="!toggleDisabl3"
                                                 label="image"
-                                                :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                                :append-icon="!toggleDisable3 ? ' ' : 'mdi-pencil'"
                                                 ></v-text-field>
-<!-- 
-                                <v-text-field
-                                            outline
-                                            label="Birthday YYYY-MM-DD"
-                                            :rules="[rules.required]"
-                                            type="text"
-                                            :append-icon="isEditing ? 'mdi-pencil'" 
-                                            v-model="formData.username"></v-text-field>
-                
-                                <v-text-field
-                                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                                        :rules="[rules.required, rules.emailMatch]"
-                                        :type="showPassword ? 'text' : 'password'"
-                                        label="Password"
-                                        @click:append="showPassword = !showPassword"
-                                        outline
-                                        hide-details
-                                        v-model="formData.password"></v-text-field>    -->
+                                        <v-layout align-center justify-right>
+                                            <v-btn
+                                            class="ml-3"
+                                            x-small
+                                            :color="toggleDisable3 ? 'primary' : ''"
+                                            @click="toggleDisable3 = !toggleDisable3"
+                                            :append-icon="!toggleDisable3 ? ' ' : 'mdi-pencil'"
+                                            >
+                                            Change / Add profile image
+                                        </v-btn>
+                                            </v-layout>
+                                                
                             </v-form>
                     </v-card-text>
                 <v-divider></v-divider>
                         <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
-                                <v-btn color="info" text>
-                                    Forgot password?
-                                </v-btn>
+
                     <v-spacer></v-spacer>
-                                <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchInfo()"><router-view to="/"></router-view>
+                                <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchInfo"><router-view to="/"></router-view>
                                     Submit
                                 </v-btn>
                         </v-card-actions>
@@ -106,24 +102,25 @@ import cookies from 'vue-cookies'
         },
         data() {
             return {
-                rules: {
-                    required: value => !!value || 'Required.',
-                    emailMatch: () => ('The email and password you entered don\'t match')
-            },
             showPassword: false,
             darkTheme: true,
                 userInfo : [],
                 formData: {
                     email: "",
                     username: "",
+                    firstName: "",
+                    lastName: "",
                     password: "",
                     dob: Date,
                     image: "",
+                    user_id: "",
+                    token: "",
                 },
-                token: "",
-                isEditing: false,
                 platformName: 'User Profile',
-                toggleDisable: false,
+                toggleDisable1: false,
+                toggleDisable2: false,
+                toggleDisable3: false,
+                toggleDisable4: false,
                 toggleClass: true
             }
         },
@@ -143,9 +140,10 @@ import cookies from 'vue-cookies'
                 })
             },
             patchInfo() {
+                console.log(this.token);
                 axios.patch(
                     process.env.VUE_APP_BASE_DOMAIN + '/api/user',
-                    this.formData
+                    this.userInfo, this.token
                 ).then((response) => {
                     console.log(response);
                 }).catch((error) => {
@@ -163,6 +161,9 @@ import cookies from 'vue-cookies'
             this.formData = this.image;
             this.formData = this.password;
             this.formData = this.dob;
+            this.formData = this.firstName;
+            this.formData = this.lastName;
+            this.formData = this.token;
         },
     }
 </script>
@@ -174,5 +175,5 @@ import cookies from 'vue-cookies'
 <!-- please work on frontend and backend in parallel
 a state manager is a function
 in additional helper file, valid when there's a need to kick the user to the main page, not logged in. -->
-
+<!-- Spend some time while we're thinking about different features. Personas. Imaginary/potential user and how they would use the app -->
 <!-- first do the testing through Postman, and it allows you to check if it's working properly -->
