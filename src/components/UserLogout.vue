@@ -7,38 +7,36 @@
 </template>
 
 <script>
+import router from '@/router';
 import axios from 'axios';
 import cookies from 'vue-cookies'
 export default {
     name: "UserLogout",
-    data() {
-        return {
-                token: "",
-                userId: ""
-        }
-    },
+
     methods: {
         logout() {
-            axios.delete(
-                process.env.VUE_APP_BASE_DOMAIN + `/api/user-login`,
-                this.token
-            ).then(() => {
+            axios.request({
+                url: `${process.env.VUE_APP_BASE_DOMAIN}/api/user-login`,
+                method: "DELETE",
+                data: {
+                "token": this.token
+            }
+        }).then((response) => {
+            console.log(response, 'logout successful');
             }).catch((error) => {
                 console.log(error);
             })
             cookies.remove('token')
             cookies.remove('userId')
+            router.push('/')
         }
     }, 
     beforeMount() {
         this.token = cookies.get('token');
         this.userId = cookies.get('userId');
-    },
-    mounted () {
-        console.log(this.token);
-        console.log(this.userId);
-    },
+    }
 }
+
 </script>
 
 <style scoped></style>

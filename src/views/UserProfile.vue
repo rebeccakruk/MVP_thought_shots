@@ -7,7 +7,7 @@
                         <v-card-title>
                             <v-layout align-center justify-space-between>
                                 <h3 class="headline">
-                                    {{ userInfo.username }}
+                                   Welcome {{ userInfo.username }}!
                                 </h3>
 
             </v-layout>
@@ -23,17 +23,30 @@
                                             label="email"
                                             :append-icon="!toggleDisable1 ? ' ' : 'mdi-pencil'"
                                             ></v-text-field>
-                            <v-layout align-center justify-space-between>
-                                    <v-btn
-                                        class="ml-3"
-                                        x-small
-                                        :color="toggleDisable1 ? 'primary' : ''"
-                                        :append-icon="!toggleDisable1 ? ' ' : 'mdi-pencil'"
-                                        @click="toggleDisable1 = !toggleDisable1"
-                                        >
-                                        Edit email
-                                    </v-btn>
-                                        </v-layout>
+                                                                <v-layout align-center justify-space-between>
+                                        <v-btn
+                                            class="ml-3"
+                                            x-small
+                                            :color="toggleDisable1 ? 'primary' : ''"
+                                            :append-icon="!toggleDisable1 ? ' ' : 'mdi-pencil'"
+                                            @click="toggleDisable1 = !toggleDisable1"
+                                            >
+                                            Edit email
+                                        </v-btn>
+                                            </v-layout>
+                                <v-text-field 
+                                            v-model="userInfo.createdAt"
+                                            :disabled="!toggleDisable"
+                                            label="member since"
+                                            :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                            ></v-text-field>
+        
+                                        <v-text-field 
+                                                v-model="userInfo.firstName"
+                                                :disabled="!toggleDisable"
+                                                label="email"
+                                                :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                                ></v-text-field>
                                             <v-text-field 
                                                 v-model="userInfo.lastName"
                                                 :disabled="!toggleDisable2"
@@ -51,9 +64,15 @@
                                             Edit last name
                                         </v-btn>         
                                         </v-layout>
+                                        <v-text-field 
+                                                v-model="userInfo.dob"
+                                                :disabled="!toggleDisable"
+                                                label="DOB"
+                                                :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                                ></v-text-field>
                                                 <v-text-field 
                                                 v-model="userInfo.image"
-                                                :disabled="!toggleDisabl3"
+                                                :disabled="!toggleDisable3"
                                                 label="image"
                                                 :append-icon="!toggleDisable3 ? ' ' : 'mdi-pencil'"
                                                 ></v-text-field>
@@ -67,6 +86,7 @@
                                             >
                                             Change / Add profile image
                                         </v-btn>
+
                                             </v-layout>
                                                 
                             </v-form>
@@ -114,6 +134,7 @@ import cookies from 'vue-cookies'
                     dob: Date,
                     image: "",
                     user_id: "",
+                    createdAt: "",
                     token: "",
                 },
                 platformName: 'User Profile',
@@ -163,6 +184,7 @@ import cookies from 'vue-cookies'
             this.formData = this.dob;
             this.formData = this.firstName;
             this.formData = this.lastName;
+            this.formData = this.createdAt;
             this.formData = this.token;
         },
     }

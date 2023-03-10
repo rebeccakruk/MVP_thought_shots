@@ -7,11 +7,12 @@
             <v-text-field v-model="formData.email" label="email" type="email" class="rounded-0" outlined></v-text-field>
             <v-text-field v-model="formData.dob" hint="Why? We want to ensure the content accessed is age appropriate for users under 18." label="date of birth (mm-dd-yyyy)" type="date" class="rounded-0" outlined></v-text-field>
             <v-text-field v-model="formData.image" label="profile picture (optional)" type="img" class="rounded-0" outlined></v-text-field>
-            <v-btn @click="register()"><router-view to="/"></router-view>Register</v-btn>
+            <v-btn @click="register()">Register</v-btn>
         </div>
 </template>
 
 <script>
+import router from 'vue-router';
 import axios from 'axios';
 import cookies from 'vue-cookies';
 
@@ -40,6 +41,7 @@ import cookies from 'vue-cookies';
                             let id = response.data.userId
                             cookies.set('token', token)
                             cookies.set('userId', id)
+                            router.push('/')
                         }).catch((error) => {
                             console.log(error);
                         })
