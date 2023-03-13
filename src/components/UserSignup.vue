@@ -27,7 +27,6 @@ import cookies from 'vue-cookies';
                     password: "",
                     email: "",
                     dob: "",
-                    image: "",
                 }
             }
         },

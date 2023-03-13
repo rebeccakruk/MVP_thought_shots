@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainView from '../views/MainView.vue'
+import MyPolls from '../views/MyPolls.vue'
 import userLogin from '../components/userLogin.vue'
 import UserLogout from '../components/UserLogout.vue'
 import UserSignup from '../components/UserSignup.vue'
@@ -13,6 +14,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: MainView
+  },
+  { 
+    path: '/mypolls',
+    name: 'mypolls',
+    component: MyPolls
   },
   {
     path: '/login',

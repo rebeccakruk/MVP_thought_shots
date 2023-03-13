@@ -7,86 +7,44 @@
                         <v-card-title>
                             <v-layout align-center justify-space-between>
                                 <h3 class="headline">
-                                   Welcome {{ userInfo.username }}!
+                                Welcome {{ userInfo.username }}!
                                 </h3>
-
             </v-layout>
-            
+            <p>Member since {{ userInfo.createdAt }}</p>
             </v-card-title>
                 <v-divider></v-divider>
                     <v-card-text>
-                            
                         <v-form>
+                            <v-layout align-center justify-space-between>
                                 <v-text-field 
                                             v-model="userInfo.email"
                                             :disabled="!toggleDisable1"
                                             label="email"
-                                            :append-icon="!toggleDisable1 ? ' ' : 'mdi-pencil'"
                                             ></v-text-field>
-                                                                <v-layout align-center justify-space-between>
-                                        <v-btn
-                                            class="ml-3"
-                                            x-small
-                                            :color="toggleDisable1 ? 'primary' : ''"
-                                            :append-icon="!toggleDisable1 ? ' ' : 'mdi-pencil'"
-                                            @click="toggleDisable1 = !toggleDisable1"
-                                            >
-                                            Edit email
-                                        </v-btn>
-                                            </v-layout>
-                                <v-text-field 
-                                            v-model="userInfo.createdAt"
-                                            :disabled="!toggleDisable"
-                                            label="member since"
-                                            :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
-                                            ></v-text-field>
-        
+                                            <v-icon flat :color="toggleDisable1 ? 'primary' : ' '" @click="toggleDisable1 = !toggleDisable1">mdi-pencil</v-icon>
+                                    </v-layout>
+                            <v-layout align-center justify-space-between>
                                         <v-text-field 
                                                 v-model="userInfo.firstName"
-                                                :disabled="!toggleDisable"
-                                                label="email"
-                                                :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
+                                                :disabled="!toggleDisable2"
+                                                label="first name"
                                                 ></v-text-field>
+                                                <v-icon flat :color="toggleDisable2 ? 'primary' : ' '" @click="toggleDisable2 = !toggleDisable2">mdi-pencil</v-icon>
+                                                </v-layout>
+                            <v-layout align-center justify-space-between>
                                             <v-text-field 
                                                 v-model="userInfo.lastName"
-                                                :disabled="!toggleDisable2"
+                                                :disabled="!toggleDisable3"
                                                 label="last name"
-                                                :append-icon="!toggleDisable2 ? ' ' : 'mdi-pencil'"
                                                 ></v-text-field>
-                                                <v-layout align-center justify-space-between>
-                                        <v-btn
-                                            class="ml-3"
-                                            x-small
-                                            :color="toggleDisable2 ? 'primary' : ''"
-                                            :append-icon="!toggleDisable2 ? ' ' : 'mdi-pencil'"
-                                            @click="toggleDisable2 = !toggleDisable2"
-                                            >
-                                            Edit last name
-                                        </v-btn>         
-                                        </v-layout>
+                                                <v-icon flat :color="toggleDisable3 ? 'primary' : ' '" @click="toggleDisable3 = !toggleDisable3">mdi-pencil</v-icon>
+                                                </v-layout>
                                         <v-text-field 
                                                 v-model="userInfo.dob"
-                                                :disabled="!toggleDisable"
                                                 label="DOB"
-                                                :append-icon="!toggleDisable ? ' ' : 'mdi-pencil'"
-                                                ></v-text-field>
-                                                <v-text-field 
-                                                v-model="userInfo.image"
-                                                :disabled="!toggleDisable3"
-                                                label="image"
-                                                :append-icon="!toggleDisable3 ? ' ' : 'mdi-pencil'"
+                                                :disabled="toggleClass"
                                                 ></v-text-field>
                                         <v-layout align-center justify-right>
-                                            <v-btn
-                                            class="ml-3"
-                                            x-small
-                                            :color="toggleDisable3 ? 'primary' : ''"
-                                            @click="toggleDisable3 = !toggleDisable3"
-                                            :append-icon="!toggleDisable3 ? ' ' : 'mdi-pencil'"
-                                            >
-                                            Change / Add profile image
-                                        </v-btn>
-
                                             </v-layout>
                                                 
                             </v-form>
@@ -95,8 +53,8 @@
                         <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
 
                     <v-spacer></v-spacer>
-                                <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchInfo"><router-view to="/"></router-view>
-                                    Submit
+                                <v-btn 
+                                color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchInfo">Submit<router-view to="/"></router-view>
                                 </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -113,6 +71,7 @@
 <script>
 import axios from 'axios'
 import cookies from 'vue-cookies'
+import router from '@/router';
 
 
     export default {
@@ -132,7 +91,6 @@ import cookies from 'vue-cookies'
                     lastName: "",
                     password: "",
                     dob: Date,
-                    image: "",
                     user_id: "",
                     createdAt: "",
                     token: "",
@@ -170,7 +128,8 @@ import cookies from 'vue-cookies'
                 }).catch((error) => {
                     console.log(error);
                 })
-            }
+                router.push('/')
+            },
         },
         beforeMount () {
             this.token = cookies.get('token');
@@ -179,7 +138,6 @@ import cookies from 'vue-cookies'
             this.getInfo();
             this.formData = this.email;
             this.formData = this.username;
-            this.formData = this.image;
             this.formData = this.password;
             this.formData = this.dob;
             this.formData = this.firstName;

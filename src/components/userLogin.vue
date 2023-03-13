@@ -9,9 +9,6 @@
                                 <h3 class="headline">
                                     {{ platformName }}
                                 </h3>
-                    <v-flex>
-                        <v-img :alt="platformName" class="ml-3" contain height="48px" position="center right" src="https://www.mobygames.com/images/i/12/25/1435075.png"></v-img>
-                    </v-flex>
             </v-layout>
             
             </v-card-title>
