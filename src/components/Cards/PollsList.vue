@@ -1,10 +1,25 @@
 <template>
-    <div>
-        <h1>{{ myPolls.title }}</h1>
-        
-        {{ myPolls.description }}
-        {{ myPolls.category }}
-    </div>
+        <v-app class="pollList" id="inspire">
+    
+        <v-container class="green lighten-5">
+            <v-row>
+            <v-col md="3">
+                <v-card v-for="cat in myPolls.filter(({category}) => !uniqueValue[category] && (uniqueValue[category] = true))"
+                    :key="cat.category"
+                    :catId="cat.category"
+                class="pa-2"
+                outlined
+                tile
+                >
+                {{ cat.categoryName}}
+                </v-card>
+            </v-col>
+            
+            </v-row>
+        </v-container>
+
+    </v-app>
+
 </template>
 
 <script>
@@ -12,50 +27,58 @@ import axios from 'axios';
 import cookies from 'vue-cookies';
     export default {
         name: "PollsList",
-        props: {
-            myPolls: {
-                title: String,
-                description: String
-            }
-        },
         data() {
             return {
-                myPfolls: {
-                    title: "",
-                    description: "",
+                uniqueValue: {},
+                myPolls: [{
+                    category: "",
+                    categoryName: "",
                     createdAt: "",
+                    description: "",
                     expiry: "",
-                    pollId: "",
+                    pollId: Number,
                     pollOwner: "",
-                    category: ""
-                },
-                token: ""
-            }
-        },
+                    title: "",
+                }]
+        }
+    },
+
             methods: {
                 getPolls() {
                     axios.request({
-                    url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
-                    method: "GET",
-                    data: {
-                        "token": this.token
+                        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
+                        method: "GET",
+                        params: {
+                            "token": this.token
+                        }
+                    }).then((response) => {
+                        this.myPolls = response.data
+
+                    }).catch((error) => {
+                        console.log(error);
+                    })
                 }
-                }).then((response) => {
-                    console.log(response);
-                }).catch((error) => {
-                    console.log(error);
-                })
-        }
-    },
-    beforeMount() {
+            },
+            beforeMount() {
         this.token = cookies.get('token');
     },
     mounted () {
         this.getPolls();
-    },
+        console.log(this.token);
+        }
 }
+
+    
 </script>
 
 <style scoped>
-
+.pollList {
+    height: 30%;
+}
 </style>
+
+
+<!-- ten minutes talking about theoretical stuff, 20 minute coding exercise
+object oriented paradigm
+
+-->

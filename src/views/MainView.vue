@@ -1,29 +1,30 @@
 <template>
     <div class="home">
-        <h1>Thought-shots</h1>
-        <PollsList/>
-    <h1>this is where we do the work</h1> 
+            <h1>Thought-shots</h1>
             <nav>
+                <HeaderComp />
+                <DropDown />
+                <PollsList/>
                 <router-view />
-                <!-- <DropDown v-if="isLoggedIn()"/> -->
-                <v-btn text-decoration="none" v-if="!isLoggedIn()" @click="login()" medium ><router-link to="/login">Login</router-link></v-btn>
-                <v-btn v-if="!isLoggedIn()"  @click="register()" medium><router-link to="/register">Sign up</router-link></v-btn>
-                <v-btn v-if="isLoggedIn()" @click="getInfo()" small><router-link to="/userprofile">View account info</router-link></v-btn>
-                <v-btn v-if="isLoggedIn()" @click="logout()" small><router-link to="/logout">Logout</router-link></v-btn>
             </nav>
-    </div>
+            <FooterComp />
+        </div>
 </template>
 
 <script>
-// import DropDown from '../components/DropDown.vue';
-import cookies from 'vue-cookies';
+import HeaderComp from '../components/HeaderComp.vue';
+import DropDown from '../components/DropDown.vue';
 import PollsList from '@/components/Cards/PollsList.vue';
+import FooterComp from '../components/FooterComp.vue';
+import cookies from 'vue-cookies';
 
     export default {
     name: "MainView",
     components: {
-            // DropDown,
-            PollsList
+            HeaderComp,
+            DropDown,
+            PollsList,
+            FooterComp
         },
         methods: {
             isLoggedIn() {

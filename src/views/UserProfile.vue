@@ -10,10 +10,12 @@
                                 Welcome {{ userInfo.username }}!
                                 </h3>
             </v-layout>
-            <p>Member since {{ userInfo.createdAt }}</p>
-            </v-card-title>
-                <v-divider></v-divider>
-                    <v-card-text>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+                        <v-layout align-center justify-space-between>
+                        <p>Member since {{ userInfo.createdAt }}</p>
+                        </v-layout>
                         <v-form>
                             <v-layout align-center justify-space-between>
                                 <v-text-field 
