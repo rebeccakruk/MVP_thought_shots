@@ -43,7 +43,7 @@ import router from '@/router';
                     },
                     {
                         title: "My polls",
-                        url: "/"
+                        url: "/myPolls"
                     },
                     { 
                         title: "logout",
@@ -89,8 +89,7 @@ import router from '@/router';
     margin-bottom: 0%;
 }
 .dropdown {
-    height: 5em;
-    color: black;
+    height: 3em;
     font-size: smaller;
     text-decoration: none;
     margin: 0%;

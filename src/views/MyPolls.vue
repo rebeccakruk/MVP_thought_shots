@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>MINE POLLS</h1>
         {{ myStuff.MyPolls }}
     </div>
 </template>

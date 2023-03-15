@@ -3,7 +3,7 @@
             <h1>Thought-shots</h1>
             <nav>
                 <HeaderComp />
-                <DropDown />
+                <DropDown v-if="isLoggedIn()"/>
                 <PollsList/>
                 <router-view />
             </nav>

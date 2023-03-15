@@ -4,14 +4,15 @@
         <v-container class="green lighten-5">
             <v-row>
             <v-col md="3">
-                <v-card v-for="cat in myPolls.filter(({category}) => !uniqueValue[category] && (uniqueValue[category] = true))"
-                    :key="cat.category"
+                <v-card :key="cat.category"
                     :catId="cat.category"
-                class="pa-2"
-                outlined
-                tile
+                    class="pa-2"
+                    outlined
+                    red
+                    tile v-for="cat in myPolls.filter(({category}) => !uniqueValue[category] && (uniqueValue[category] = true))"
+
                 >
-                <router-link to="/">{{ cat.categoryName }}</router-link>
+                <router-link to="/pollsView">{{ cat.categoryName }}</router-link>
                 
                 </v-card>
             </v-col>
@@ -62,7 +63,10 @@ import cookies from 'vue-cookies';
                 seeAll() {
                     axios.request({
                         url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
-                        method: "GET"
+                        method: "GET",
+                        params: {
+                            "categoryName" : this.categoryName
+                        }
             }).then((response) => {
                 this.myPolls = response.data
             }).catch((error) => {
@@ -74,8 +78,9 @@ import cookies from 'vue-cookies';
                 this.token = cookies.get('token');
                         },
             mounted () {
-            this.getPolls();
+            // this.getPolls();
             console.log(this.token);
+            this.seeAll();
                     }
 }
 
