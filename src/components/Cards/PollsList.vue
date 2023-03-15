@@ -11,7 +11,8 @@
                 outlined
                 tile
                 >
-                {{ cat.categoryName}}
+                <router-link to="/">{{ cat.categoryName }}</router-link>
+                
                 </v-card>
             </v-col>
             
@@ -57,15 +58,25 @@ import cookies from 'vue-cookies';
                     }).catch((error) => {
                         console.log(error);
                     })
+                },
+                seeAll() {
+                    axios.request({
+                        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
+                        method: "GET"
+            }).then((response) => {
+                this.myPolls = response.data
+            }).catch((error) => {
+                console.log(error);
+            })
                 }
             },
             beforeMount() {
-        this.token = cookies.get('token');
-    },
-    mounted () {
-        this.getPolls();
-        console.log(this.token);
-        }
+                this.token = cookies.get('token');
+                        },
+            mounted () {
+            this.getPolls();
+            console.log(this.token);
+                    }
 }
 
     
@@ -74,6 +85,7 @@ import cookies from 'vue-cookies';
 <style scoped>
 .pollList {
     height: 30%;
+    background-color: beige;
 }
 </style>
 
