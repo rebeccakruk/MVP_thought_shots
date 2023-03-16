@@ -6,7 +6,8 @@ import PollsView from '../views/PollsView.vue'
 import userLogin from '../components/userLogin.vue'
 import UserLogout from '../components/UserLogout.vue'
 import UserSignup from '../components/UserSignup.vue'
-import UserProfile from '../views/UserProfile.vue'
+import UserProfile from '../components/UserProfile.vue'
+import UserEdit from '../components/UserEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/userprofile',
     name: 'user',
     component : UserProfile
+  },
+  {
+    path: '/editprofile',
+    name: 'edit',
+    component : UserEdit
   },
 ]
 

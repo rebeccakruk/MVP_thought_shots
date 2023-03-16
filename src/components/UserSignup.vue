@@ -44,6 +44,8 @@ import cookies from 'vue-cookies';
                         }).catch((error) => {
                             console.log(error);
                         })
+                        console.log(this.formData.username, this.formData.userId)
+                        this.$root.$emit(this.formData.username)
                     }
                 }
     }

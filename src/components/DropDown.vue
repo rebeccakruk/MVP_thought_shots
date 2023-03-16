@@ -39,10 +39,10 @@ import router from '@/router';
                 items: [
                     { 
                         title: "edit profile",
-                        url: '/userprofile',
+                        url: '/editprofile',
                     },
                     {
-                        title: "My polls",
+                        title: "my polls",
                         url: "/myPolls"
                     },
                     { 
