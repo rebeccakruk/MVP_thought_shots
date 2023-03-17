@@ -79,7 +79,7 @@
         depressed
         >
         Next
-        </v-btn>
+        <router-link to="/addquestions"></router-link></v-btn>
         <!-- <v-btn
         color="primary"
         depressed

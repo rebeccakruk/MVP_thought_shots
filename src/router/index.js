@@ -4,6 +4,7 @@ import MainView from '../views/MainView.vue'
 import MyPolls from '../views/MyPolls.vue'
 import PollsView from '../views/PollsPageView.vue'
 import userLogin from '../components/userLogin.vue'
+import AddQuestions from '../components/AddQuestions.vue'
 import UserLogout from '../components/UserLogout.vue'
 import UserSignup from '../components/UserSignup.vue'
 import UserProfile from '../components/UserProfile.vue'
@@ -21,6 +22,11 @@ const routes = [
     path: '/mypolls',
     name: 'mypolls',
     component: MyPolls
+  },
+  { 
+    path: '/addquestions',
+    name: 'addquestions',
+    component: AddQuestions
   },
   { 
     path: '/pollsView',
