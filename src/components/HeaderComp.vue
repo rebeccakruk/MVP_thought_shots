@@ -1,6 +1,9 @@
 <template>
-    <div>
+    <div class="home">
+    
+        <nav>
         <router-view/>
+                <h1>Thought-shots</h1>
         <v-layout align-center justify-right>
             <v-spacer>
                 <v-btn v-if="!isLoggedIn()" @click="login()" small fixed right class="text-decoration-none" >
@@ -13,7 +16,7 @@
                 </v-btn>
             </v-spacer>
             </v-layout>
-
+            </nav>
     </div>
 </template>
 

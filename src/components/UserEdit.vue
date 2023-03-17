@@ -67,10 +67,7 @@ import router from '@/router';
 
 
 export default {
-    name: "UserProfile",
-    components: {
-
-    },
+    name: "UserEdit",
     data() {
         return {
             showPassword: false,

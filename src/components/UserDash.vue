@@ -1,7 +1,7 @@
-<template>
-    <div @onload="$emit('getDash')">
+<!-- <template>
+    <div @onload="$emit('getInfo')">
         <p>Welcome, {{ username }}</p>
-        <p>{{ noLogin }} </p>
+
 
     </div>
 </template>
@@ -18,7 +18,7 @@
             }
         },
         mounted () {
-            this.$root.$emit('getDash', this.username);
+            this.$emit('getInfo')
         },
     }
 
@@ -26,6 +26,7 @@
 
 <style scoped>
 .div {
-    background-color: pink;
+    border: 3px, black;
+    background-color: hotpink;
 }
-</style>
+</style> -->

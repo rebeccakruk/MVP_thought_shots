@@ -1,6 +1,6 @@
 <template>
         <v-app class="pollList" id="inspire">
-    
+    <h3>Public Polls</h3>
         <v-container class="green lighten-5">
             <v-row>
             <v-col md="3">
