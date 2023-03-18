@@ -28,6 +28,8 @@ export default {
             })
             cookies.remove('token')
             cookies.remove('userId')
+            cookies.remove('questionId')
+            cookies.remove('newPoll')
             router.push('/')
         }
     }, 

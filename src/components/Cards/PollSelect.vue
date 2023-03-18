@@ -6,7 +6,20 @@
 
 <script>
     export default {
-        name: "PollSelect"
+        name: "PollSelect",
+        props: {
+                category: String,
+                categoryName: String,
+                createdAt: String,
+                description: String,
+                expiry: String,
+                pollId: Number,
+                pollOwner: String,
+                title: String,
+                question: String,
+                questionId: Number,
+                option: String,
+        }
     }
 </script>
 

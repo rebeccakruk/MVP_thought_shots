@@ -72,14 +72,14 @@
 
     <v-divider></v-divider>
 
-<v-card-actions>
+<v-card-actions text-decoration-none>
         <v-spacer></v-spacer>
         <v-btn @click="new_poll()"
         color="success"
         depressed
+        submit
         >
-        Next
-        <router-link to="/addquestions"></router-link></v-btn>
+        <router-link to="/addquestions">Next</router-link></v-btn>
         <!-- <v-btn
         color="primary"
         depressed
@@ -100,6 +100,7 @@ import cookies from 'vue-cookies';
         name: "MyPolls",
         data() {
             return {
+                newPoll: [],
                 token: "",
                 pollCreateData: 
                     {
@@ -137,9 +138,11 @@ import cookies from 'vue-cookies';
                     axios.post(
                         process.env.VUE_APP_BASE_DOMAIN + '/api/poll-owner',
                         this.pollCreateData,
-                        
                 ).then((response) => {
-console.log(response);
+                    let newPoll = response.data.pollId
+                    console.log(response)
+                    cookies.set('newPoll', newPoll)
+                    
                 }).catch((error) => {
                     console.log(error);
         })
