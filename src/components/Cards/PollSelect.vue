@@ -1,5 +1,15 @@
 <template>
     <div>
+        <v-card>
+            <div>
+                <h1>{{ title }}</h1>
+                <h3>{{ description }}</h3>
+            </div>
+            <div>
+                <h4>{{ question }}</h4>
+                <li>{{ responseOption }}</li>
+            </div>
+        </v-card>
         <h2>PICKED ME!</h2>
     </div>
 </template>
@@ -18,7 +28,8 @@
                 title: String,
                 question: String,
                 questionId: Number,
-                option: String,
+                responseOption: String,
+                responseOptionId: Number
         }
     }
 </script>

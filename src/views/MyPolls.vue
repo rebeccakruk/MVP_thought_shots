@@ -106,7 +106,7 @@ import cookies from 'vue-cookies';
                     {
                     title : "",
                     description: "",
-                    category: 1,
+                    category: 8,
                     expiry: null,
                     invite: 0,
                     limits: null,

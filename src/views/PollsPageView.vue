@@ -2,20 +2,101 @@
     <div>
         <!-- there will be a listing here of available polls and the option to participate in one -->
         <!-- this will be prettier than the categories. OR do the polls appear under the selection on the mainview. ... design categories -->
-        <PollSelect />
+        <!-- <PollSelect v-for="question in poll" :key="question.id" :response="question.responseOptionId"/> -->
+        <!-- <div v-for="question in data" :key="question.questionId" v-bind="question">
+            <h4>{{ question }}</h4>
+            <v-btn>{{ responseOption }}</v-btn>
+        </div> -->
+        <h1>WHAT THE HECK REBECCA</h1>
+                <v-container class="green lighten-5">
+                <v-row>
+                <v-col md="3">
+                    <v-card :key="question.questionId"
+                        :questionId="question.questionId"
+                        class="pa-2"
+                        outlined
+                        red
+                        tile v-for="question in poll.filter(({ questionId }) => !uniqueValue[questionId] && (uniqueValue[questionId] = true))"
+                    >
+                    
+                    <h3>{{ question.question }}</h3>
+                    
+                    <div v-for="option in poll" :key="option.responseOptionId" v-bind="poll.questionId">
+                        <h4>{{ option.responseOption[0] }}</h4>
+                    </div>
+                
+                    </v-card>
+                </v-col>
+            
+                </v-row>
+            </v-container>
+        <div v-for="ask in pollInfo" :key="ask.questionId" v-bind="ask">
+        <h2>{{ ask.question }}</h2>
+        <h3>{{ ask.responseOption }}</h3></div>
         <!-- this is where the poll you've chosen will appear on a click -->
+
     </div>
 </template>
 
 <script>
-import PollSelect from '@/components/Cards/PollSelect.vue';
-
+// import PollSelect from '@/components/Cards/PollSelect.vue';
+import axios from 'axios';
+import cookies from 'vue-cookies';
     export default {
     name: "PollsView",
     components: { 
-        PollSelect 
+        // PollSelect 
+    },
+    data() {
+        return {
+            uniqueValue: {},
+            pollInfo: [
+                {
+                category: "",
+                categoryName: "",
+                createdAt: "",
+                description: "",
+                expiry: "",
+                pollId: 92,
+                pollOwner: "",
+                title: "",
+                question: "",
+                token: "",
+                questionId: "",
+                responseOption: "",
+                responseOptionId: "",
+            }
+        ],
+            poll: [],
+            token: ""
     }
-}
+},
+    methods: {
+    getQandAs() {
+        axios.request({
+            url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-user`,
+            method: "GET",
+            params: {
+                // "token": this.pollInfo.token,
+                "pollId": 92,
+                "token" : this.token
+            },
+            }).then((response) => {
+                this.poll = response.data
+                console.log(this.poll);
+            }).catch((error) => {
+                console.log(error);
+            })
+    },
+    beforeMount () {
+        this.pollInfo.token = cookies.get('token');
+    },
+},mounted () {
+    this.token = cookies.get('token')
+    this.getQandAs();
+},
+    }
+    
 </script>
 
 <style scoped>

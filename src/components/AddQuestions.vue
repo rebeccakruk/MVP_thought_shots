@@ -4,8 +4,7 @@
     <div>
                                 <h2>{{ newQuestion }}</h2>
                            
-                            <div v-for="(option, index) in optionsList" :key="index" v-bind="option"><h3>{{ optionsList.option }}</h3></div>
-                            <h4>{{ optionsList }}</h4>
+                            <div v-for="(option, index) in optionsList" :key="index" v-bind="option"><h3>{{ option }}</h3></div>
                             </div>
         <v-card>
                 <v-form>
@@ -127,7 +126,7 @@ import cookies from 'vue-cookies';
         closePoll() {
             this.formData = "";
             this.data = "";
-            router.push('/')
+            router.push('/pollsView')
         }
         },
         mounted () {
