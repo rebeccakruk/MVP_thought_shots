@@ -9,7 +9,7 @@
         </div> -->
         <h1>WHAT THE HECK REBECCA</h1>
                 <v-container class="green lighten-5">
-                <v-row>
+                <!-- <v-row>
                 <v-col md="3">
                     <v-card :key="question.questionId"
                         :questionId="question.questionId"
@@ -21,21 +21,28 @@
                     
                     <h3>{{ question.question }}</h3>
                     
-                    <div v-for="option in poll" :key="option.responseOptionId" v-bind="poll.questionId">
-                        <h4>{{ option.responseOption[0] }}</h4>
+                    <div v-for="option in pollInfo.filter(({questionId}) => !uniqueValue[questionId] && (uniqueValue[questionId] = true))" 
+                        :key="option.questionId"
+                        :responseId="option.responseId" 
+                        v-bind="pollInfo.questionId">
+                        <h4>{{ responseOfption[0] }}</h4>
                     </div>
                 
                     </v-card>
                 </v-col>
             
-                </v-row>
+                </v-row> -->
             </v-container>
-        <div v-for="ask in pollInfo" :key="ask.questionId" v-bind="ask">
+        <div v-for="ask in pollInfo.filter(({ questionId }) => !uniqueValue[questionId] && (uniqueValue[questionId] = true))" :key="ask.questionId" v-bind="ask">
         <h2>{{ ask.question }}</h2>
-        <h3>{{ ask.responseOption }}</h3></div>
-        <!-- this is where the poll you've chosen will appear on a click -->
-
+        <!-- <div 
+        v-for="option in pollInfo.filter(({ responseOptionId }) => !uniqueValue[responseOptionId] && (uniqueValue[responseOptionId] = true))"
+        :key="option.responseOptionId" v-bind="pollInfo.questionId"><h3>{{ option.responseOption }}</h3></div>
+    </div> -->
     </div>
+        <!-- this is where the poll you've chosen will appear on a click -->
+</div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -67,8 +74,9 @@ import cookies from 'vue-cookies';
                 responseOptionId: "",
             }
         ],
-            poll: [],
-            token: ""
+            token: "",
+            opts: "",
+            responses: []
     }
 },
     methods: {
@@ -82,8 +90,11 @@ import cookies from 'vue-cookies';
                 "token" : this.token
             },
             }).then((response) => {
-                this.poll = response.data
-                console.log(this.poll);
+                this.pollInfo = response.data
+                this.pollInfo.questionId = response.data.questionId
+                this.opts = response.data.responseOption
+                this.responses.push(this.responseOptionId)
+                console.log(this.pollInfo.questionId);
             }).catch((error) => {
                 console.log(error);
             })
