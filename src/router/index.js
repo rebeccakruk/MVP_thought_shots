@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainView from '../views/MainView.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
 import MyPolls from '../views/MyPolls.vue'
 import PollsPageView from '../views/PollsPageView.vue'
 import userLogin from '../components/userLogin.vue'
@@ -17,6 +18,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: MainView
+  },
+  {
+    path: '/:catchAll(.*)*',
+    name: 'pagenotfound',
+    component: PageNotFound
   },
   { 
     path: '/mypolls',

@@ -6,9 +6,9 @@
         Welcome {{ userInfo.username }}
     </v-container>
 
-    <v-container color="black">
+    <v-container v-for="mine in minePolls" :key="mine.pollId" v-bind="mine" color="black">
         
-        {{ minePolls.title }}
+        {{ mine.title }}
         {{ minePolls.category }}
 
     </v-container>
@@ -78,7 +78,7 @@ import cookies from 'vue-cookies'
                         "token": userToken
                     }
             }).then((response) => {
-                this.minePolls = response.data[0]
+                this.minePolls = response.data
                 console.log(response.data);
             }).catch((error) => {
                 console.log(error);
