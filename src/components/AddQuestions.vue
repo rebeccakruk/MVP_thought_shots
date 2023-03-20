@@ -3,7 +3,7 @@
         <p>HI. This is where you add questions and options.</p>
     <div>
                                 <h2>{{ newQuestion }}</h2>
-                           
+                        
                             <div v-for="(option, index) in optionsList" :key="index" v-bind="option"><h3>{{ option }}</h3></div>
                             </div>
         <v-card>

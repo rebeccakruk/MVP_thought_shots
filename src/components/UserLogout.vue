@@ -1,13 +1,15 @@
 <template>
     <div>
         <v-form>
-            <v-btn @click="logout()"><router-view to="/"></router-view>Logout</v-btn>
+            <v-card-actions>
+            <router-view to="/"><v-btn @click="logout()">Logout</v-btn></router-view>
+            </v-card-actions>
         </v-form>
     </div>
 </template>
 
 <script>
-import router from '@/router';
+// import router from '@/router';
 import axios from 'axios';
 import cookies from 'vue-cookies'
 export default {
@@ -30,7 +32,7 @@ export default {
             cookies.remove('userId')
             cookies.remove('questionId')
             cookies.remove('newPoll')
-            router.push('/')
+            this.$router.go('/')
         }
     }, 
     beforeMount() {
