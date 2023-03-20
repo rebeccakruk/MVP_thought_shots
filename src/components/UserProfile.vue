@@ -26,7 +26,8 @@
               v-for="mine in minePolls" :key="mine.pollId" v-bind="mine"
             >
               <v-list-item-icon>
-                <v-icon v-text="mine.title"></v-icon>
+                <v-icon v-text="mine.title"
+                @click="goToPoll()"></v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="mine.description"></v-list-item-title>
@@ -41,6 +42,7 @@
 </template>
 
 <script>
+import router from '@/router';
 import axios from 'axios'
 import cookies from 'vue-cookies'
 
@@ -110,6 +112,9 @@ import cookies from 'vue-cookies'
                 console.log('here we are. not logfgfdsgfdgged in.');
             })
         },
+        goToPoll() {
+            router.push('/')
+        }
     
     },
         mounted () {

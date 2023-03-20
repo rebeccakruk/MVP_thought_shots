@@ -1,23 +1,7 @@
 <template>
     <div id="app">
         <h1>WHAT THE HECK REBECCA</h1>
-        <h2>{{ this.question }}</h2>
-        <v-app id="inspire"><v-app id="inspire">
-        <div>
-            <v-data-table
-                :headers="headers"
-                :items="desserts"
-                class="elevation-1"
-            >
-            <template >
-                <v-simple-checkbox
-                    v-model="this.responseOption"
-                    v-on="on"
-            ></v-simple-checkbox>
-            </template>
-        </v-data-table>
-        </div>
-    </v-app>
+        <h2>{{ pollInfo.title }}</h2>
         <!-- there will be a listing here of available polls and the option to participate in one -->
         <!-- this will be prettier than the categories. OR do the polls appear under the selection on the mainview. ... design categories -->
         <!-- <PollSelect v-for="question in poll" :key="question.id" :response="question.responseOptionId"/> -->
@@ -25,89 +9,46 @@
             <h4>{{ question }}</h4>
             <v-btn>{{ responseOption }}</v-btn>
         </div> -->
-        <!-- <TakePoll v-for="poll in pollInfo" :key="poll.pollId" :title="poll.title" :responseOption="poll.responseOption" :question="poll.question"/>
-                <v-container class="green lighten-5"> -->
-
-        <v-data-table
-        :headers="this.headers"
-        class="elevation-1"
-        >
-                    {{ title }}
-        <v-simple-checkbox
-        v-model="responseOption"
-        ></v-simple-checkbox>
-
-        </v-data-table> 
-            <v-row>
-                <v-col md="3">
-                    <v-card :key="question.questionId"
-                        :questionId="question.questionId"
-                        class="pa-2"
-                        outlined
-                        red
-                        tile v-for="question in pollInfo.filter(({ questionId }) => !uniqueValue[questionId] && (uniqueValue[questionId] = true))"
-                    >
-
-                    <h3>{{ question.question }}</h3>
-                    
-                    <div v-for="option in data.filter(({questionId}) => !uniqueValue[questionId] && (uniqueValue[questionId] = true))" 
-                        :key="option.questionId"
-                        :responseId="option.responseId" 
-                        >
-                        <h4>{{ data.responseOption[0] }}</h4>
-                    </div>
-                
-                    </v-card>
-                </v-col>
-            
-                </v-row>
-        <!-- <v-data-table v-for="ask in pollInfo.filter(({ questionId }) => !uniqueValue[questionId] && (uniqueValue[questionId] = true))" :key="ask.questionId" v-bind="ask">
-        <h2>{{ ask.question }}</h2>
-            
-        </v-data-table>
-        <v-data-table v-for="question in pollInfo" :key="question.questionId" :headers="question.headers"
-        >
-        <v-check-box
-        v-model="headers.responseOption"></v-check-box> </v-data-table>  -->
-        <div 
-        v-for="option in data.filter(({ responseOptionId }) => !uniqueValue[responseOptionId] && (uniqueValue[responseOptionId] = true))"
-        :key="option.responseOptionId" v-bind="option.questionId"><h3>{{ option.responseOption }}</h3></div>
-    </v-app>
-    </div>
+        <v-card>
+        <v-list v-for="poll in pollInfo.filter(({ questionId}) => !uniqueValue[questionId] && (uniqueValue[questionId] = true))" 
+        :key="poll.questionId" :title="poll.title" :question="poll.question" @click="select(option)">
+            {{ poll.title }}
+            {{ poll.description }}
+            {{ poll.question }}
+            {{ poll.responseId }}
+            {{ poll.responseOption[0] }}
+        </v-list>
+    </v-card>
     
-    <!-- this is where the poll you've chosen will appear on a click -->
-    
-    <!-- </div> -->
+
+</div>
 </template>
-
 <script>
 // import PollSelect from '@/components/Cards/PollSelect.vue';
 // import TakePoll from '@/components/TakePoll.vue';
 import axios from 'axios';
 import cookies from 'vue-cookies';
     export default {
-    name: "PollsView",
+    name: "PollsPageView",
     components: {
     // TakePoll
 },
     data() {
         return {
             uniqueValue: {},
-                headers: [
-                    {
-                        text: this.title,
-                        align: 'start',
-                        sortable: false,
-                        value: this.responseId
-                    },
-                ],
-                    responseOption: "",
+                pollInfo:{
+                    title: "",
+                    responseId: [],
+                    responseOption: [],
                     pollId: "",
                     question: "",
-                    responseId: "",
                     questionId: "",
                     description: "",
                     token: ""
+                    },
+                qaInfo: [],
+                options: [],
+                selection: ""
     }
 },
     methods: {
@@ -120,17 +61,19 @@ import cookies from 'vue-cookies';
                 "token" : this.token
             },
             }).then((response) => {
-                console.log(response.data)
                 this.pollInfo = response.data
+                console.log(this.pollInfo);
             }).catch((error) => {
                 console.log(error);
             })
     },
+    selectOption(option) {
+    this.selection = option;
+    },
     beforeMount () {
-
+        this.token = cookies.get('token')
     },
 },mounted () {
-    this.token = cookies.get('token')
     this.getQandAs();
 },
     }

@@ -1,29 +1,9 @@
 <template>
     <div id="app">
       <v-app id="inspire">
-        <div>
-          <v-data-table
-            :headers="headers"
-            :items="question"
-            class="elevation-1"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-simple-checkbox
-                v-model="item.responseOption"
-                v-bind="attrs"
-                v-on="on"
-            
-              ></v-simple-checkbox>
-            </template>
-                    <!-- <template v-slot:item.coke="{ item }">
-            <v-simple-checkbox
-                v-model="item.coke"
-                :click="disable"
-            
-            ></v-simple-checkbox>
-            </template> -->
-          </v-data-table>
-        </div>
+        <v-container>
+          <h3></h3>
+        </v-container>
       </v-app>
     </div>
 </template>
@@ -32,21 +12,13 @@
     export default {
         name : "TakePoll",
         props: {
-            items: [
-                {
-                    question: String,
-                    }
-            ],
-            headers: [
-                {
-                    title: String,
-                    align: 'start',
-                    sortable: false,
-                    responseOption: String
-            },
-        ],
+                question: String,
+                responseOption: String,
+                title: String,
+
+                responseOption: String
+            },      
         }
-    }
 </script>
 
 <style scoped>

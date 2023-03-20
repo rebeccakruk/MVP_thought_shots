@@ -72,14 +72,16 @@ import router from '@/router';
                         expiry: "",
                         pollOwner: "",
                         title: "",
-
-                }
+                        token: ""
+                },
+            toggleDisable1: false,
+            toggleDisable2: false,
+            toggleDisable3: false,
+            toggleClass: true
             }
         },
         methods: {
             getPoll() {
-                let token = cookies.get('token')
-                console.log(token);
                 axios.request({
                     url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-owner`,
                     method: "GET",

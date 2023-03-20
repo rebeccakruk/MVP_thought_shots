@@ -86,7 +86,6 @@ export default {
             toggleDisable1: false,
             toggleDisable2: false,
             toggleDisable3: false,
-            toggleDisable4: false,
             toggleClass: true
         }
     },
