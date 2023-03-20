@@ -64,7 +64,7 @@ import router from '@/router';
                 router.push('/userprofile')
             },
             viewMyPolls(){
-                router.push('/')
+                router.push('/editpoll')
             },
             goToLogout() {
                 router.push('/logout')

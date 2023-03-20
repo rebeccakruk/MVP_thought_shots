@@ -6,12 +6,36 @@
         Welcome {{ userInfo.username }}
     </v-container>
 
-    <v-container v-for="mine in minePolls" :key="mine.pollId" v-bind="mine" color="black">
+    <!-- <v-container v-for="mine in minePolls" :key="mine.pollId" v-bind="mine" color="black">
         
         {{ mine.title }}
-        {{ minePolls.category }}
-
-    </v-container>
+        {{ minePolls.category }} -->
+    <v-card
+    class="overflow-y-auto"
+    max-height="300"
+        tile
+    >
+        <v-list dense
+         >
+          <h4>My Polls</h4>
+          <v-list-item-group
+            v-model="minePolls.title"
+            color="primary"
+          >
+            <v-list-item
+              v-for="mine in minePolls" :key="mine.pollId" v-bind="mine"
+            >
+              <v-list-item-icon>
+                <v-icon v-text="mine.title"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="mine.description"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-card>
+    <!-- </v-container> -->
     
     </v-app>
 </template>

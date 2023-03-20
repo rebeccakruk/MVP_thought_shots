@@ -3,12 +3,14 @@ import VueRouter from 'vue-router'
 import MainView from '../views/MainView.vue'
 // import PageNotFound from '@/views/PageNotFound.vue'
 import MyPolls from '../views/MyPolls.vue'
+import OwnerPoll from '../views/OwnerPoll.vue'
 import PollsPageView from '../views/PollsPageView.vue'
 import userLogin from '../components/userLogin.vue'
 import AddQuestions from '../components/AddQuestions.vue'
 import UserLogout from '../components/UserLogout.vue'
 import UserSignup from '../components/UserSignup.vue'
 import UserProfile from '../components/UserProfile.vue'
+import EditPoll from '../components/EditPoll.vue'
 import UserEdit from '../components/UserEdit.vue'
 
 Vue.use(VueRouter)
@@ -28,6 +30,11 @@ const routes = [
     path: '/mypolls',
     name: 'mypolls',
     component: MyPolls
+  },
+  { 
+    path: '/ownerpoll',
+    name: 'ownerpoll',
+    component: OwnerPoll
   },
   { 
     path: '/addquestions',
@@ -63,6 +70,11 @@ const routes = [
     path: '/editprofile',
     name: 'edit',
     component : UserEdit
+  },
+  {
+    path: '/editpoll',
+    name: 'editpoll',
+    component : EditPoll
   },
 ]
 

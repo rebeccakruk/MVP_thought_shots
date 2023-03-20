@@ -35,9 +35,7 @@
                                     <v-icon flat :color="toggleDisable3 ? 'primary' : ' '"
                                         @click="toggleDisable3 = !toggleDisable3">mdi-pencil</v-icon>
                                 </v-layout>
-                                <v-text-field v-model="userInfo.dob" label="DOB" :disabled="toggleClass"></v-text-field>
-                                <v-layout align-center justify-right>
-                                </v-layout>
+
 
                             </v-form>
                         </v-card-text>
@@ -45,9 +43,11 @@
                         <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
 
                             <v-spacer></v-spacer>
-                            <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchInfo">Submit<router-view
-                                    to="/"></router-view>
-                            </v-btn>
+                            <router-view to="/">
+                                <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchInfo">
+                                    Submit
+                                </v-btn>
+                            </router-view>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -79,12 +79,10 @@ export default {
                 firstName: "",
                 lastName: "",
                 password: "",
-                dob: Date,
                 user_id: "",
                 createdAt: "",
                 token: "",
             },
-            platformName: 'User Profile',
             toggleDisable1: false,
             toggleDisable2: false,
             toggleDisable3: false,

@@ -12,7 +12,7 @@
                     tile v-for="cat in myPolls.filter(({category}) => !uniqueValue[category] && (uniqueValue[category] = true))"
 
                 >
-                <router-link to="/pollsView">{{ cat.categoryName }}</router-link>
+                <router-link to="/mypolls">{{ cat.categoryName }}</router-link>
                 
                 </v-card>
             </v-col>
@@ -44,29 +44,28 @@ import cookies from 'vue-cookies';
                 }]
         }
     },
+    methods: {
+        getPolls() {
+            axios.request({
+                url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
+                method: "GET",
+                params: {
+                    "token": this.token
+                }
+            }).then((response) => {
+                this.myPolls = response.data
 
-            methods: {
-                getPolls() {
-                    axios.request({
-                        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
-                        method: "GET",
-                        params: {
-                            "token": this.token
-                        }
-                    }).then((response) => {
-                        this.myPolls = response.data
-
-                    }).catch((error) => {
-                        console.log(error);
-                    })
-                },
-                seeAll() {
-                    axios.request({
-                        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
-                        method: "GET",
-                        params: {
-                            "categoryName" : this.categoryName
-                        }
+            }).catch((error) => {
+                console.log(error);
+            })
+        },
+        seeAll() {
+            axios.request({
+                url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
+                method: "GET",
+                params: {
+                    "categoryName" : this.categoryName
+                }
             }).then((response) => {
                 this.myPolls = response.data
             }).catch((error) => {
@@ -84,7 +83,6 @@ import cookies from 'vue-cookies';
                     }
 }
 
-    
 </script>
 
 <style scoped>

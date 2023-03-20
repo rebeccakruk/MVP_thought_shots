@@ -111,6 +111,7 @@ import cookies from 'vue-cookies';
                 console.log(response)
                 this.newOption = response.data.responseOption
                 this.optionsList.push(this.newOption)
+                this.formData.responseOption = "";
             }).catch((error) => {
                 console.log(error);
             })
@@ -126,7 +127,7 @@ import cookies from 'vue-cookies';
         closePoll() {
             this.formData = "";
             this.data = "";
-            router.push('/pollsView')
+            router.push('/ownerpoll')
         }
         },
         mounted () {

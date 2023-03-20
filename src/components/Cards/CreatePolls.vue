@@ -6,7 +6,7 @@
                 class="pa-2"
                 outlined
                 tile v-for="cat in myPolls.filter(({ category }) => !uniqueValue[category] && (uniqueValue[category] = true))">
-                <router-link text-decoration-none to="/opinion"><v-btn small>{{ cat.categoryName }}</v-btn></router-link>
+                <router-link text-decoration-none to="/mypolls"><v-btn small>{{ cat.categoryName }}</v-btn></router-link>
             </v-container>
     </v-app>
 </template>

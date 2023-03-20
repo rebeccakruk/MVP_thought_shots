@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import router from '@/router';
 import axios from 'axios';
 import cookies from 'vue-cookies';
 
@@ -139,10 +140,10 @@ import cookies from 'vue-cookies';
                         process.env.VUE_APP_BASE_DOMAIN + '/api/poll-owner',
                         this.pollCreateData,
                 ).then((response) => {
-                    let newPoll = response.data.pollId
+                    this.newPoll = response.data.pollId
                     console.log(response)
-                    cookies.set('newPoll', newPoll)
-                    
+                    cookies.set('newPoll', this.newPoll)
+                    router.push('/addquestions')
                 }).catch((error) => {
                     console.log(error);
         })

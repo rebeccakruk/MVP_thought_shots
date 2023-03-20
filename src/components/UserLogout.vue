@@ -2,14 +2,14 @@
     <div>
         <v-form>
             <v-card-actions>
-            <router-view to="/"><v-btn @click="logout()">Logout</v-btn></router-view>
+                <v-btn @click="logout()">Logout</v-btn>
             </v-card-actions>
         </v-form>
     </div>
 </template>
 
 <script>
-// import router from '@/router';
+import router from '@/router';
 import axios from 'axios';
 import cookies from 'vue-cookies'
 export default {
@@ -32,7 +32,7 @@ export default {
             cookies.remove('userId')
             cookies.remove('questionId')
             cookies.remove('newPoll')
-            this.$router.go('/')
+            router.push('/')
         }
     }, 
     beforeMount() {
