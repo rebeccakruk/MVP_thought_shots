@@ -3,15 +3,13 @@
         <v-card>
             <h2>{{ pollInfo.title }}</h2>
             <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
-            <TakePoll v-bind:pollInfo="pollInfo"></TakePoll>
+            <TakePoll v-bind:pollInfo="pollInfo"/>
+
         </v-card>
-
-
-
+        
 </div>
 </template>
 <script>
-// import PollSelect from '@/components/Cards/PollSelect.vue';
 import TakePoll from '@/components/TakePoll.vue';
 import axios from 'axios';
 import cookies from 'vue-cookies';
@@ -34,7 +32,6 @@ import cookies from 'vue-cookies';
                 //     description: "",
                 //     token: ""
                 //     },
-                voted: false
     }
 },
     methods: {
@@ -52,17 +49,14 @@ import cookies from 'vue-cookies';
             }).catch((error) => {
                 console.log(error);
             })
+            },
+                beforeMount () {
+                    this.token = cookies.get('token')
+            },
+        },mounted () {
+            this.getQandAs();
     },
-    selectOption(option) {
-    this.selection = option;
-    },
-    beforeMount () {
-        this.token = cookies.get('token')
-    },
-},mounted () {
-    this.getQandAs();
-},
-    }
+}
     
 </script>
 

@@ -89,9 +89,9 @@ import router from '@/router';
     margin-bottom: 0%;
 }
 .dropdown {
-    height: 3em;
+    height: 2.5em;
     font-size: smaller;
     text-decoration: none;
-    margin: 0%;
+    
 }
 </style>
