@@ -1,16 +1,17 @@
 <template>
-    <v-app>
-<div>
+    <div class="black">
             <HeaderComp />
+            <div max-height="20%vh">
             <v-container v-if="!isLoggedIn()">
                 Welcome to thought-shots! Please login or sign up to view the polls you've created or participated in.
             </v-container>
+            
             <v-container v-if="!isLoggedIn()">
                 You must be logged in to create a poll
             </v-container>
+            </div>
             <nav>
                 <v-container v-if="isLoggedIn()">
-                    <DropDown /> 
                     <UserProfile />
                     <CreatePolls />
                 </v-container>
@@ -18,13 +19,11 @@
                 <router-view />
             </nav>
             <FooterComp />
-        </div>
-        </v-app>
+    </div>
 </template>
 
 <script>
 import HeaderComp from '../components/HeaderComp.vue';
-import DropDown from '../components/DropDown.vue';
 import UserProfile from '../components/UserProfile.vue';
 import CreatePolls from '../components/Cards/CreatePolls.vue';
 import PollsList from '@/components/Cards/PollsList.vue';
@@ -35,7 +34,6 @@ import cookies from 'vue-cookies';
     name: "MainView",
     components: {
     HeaderComp,
-    DropDown,
     UserProfile,
     PollsList,
     FooterComp,
@@ -56,12 +54,14 @@ import cookies from 'vue-cookies';
         },
         mounted () {
             this.isLoggedIn();
+            this.$root.$on('refresh')
         },
     }
 </script>
 
 <style scoped>
-.noLogIn {
-    border: black;
+.black {
+    background-color: black;
+    color: whitesmoke;
 }
 </style>

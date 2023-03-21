@@ -1,6 +1,6 @@
 <template>
-    <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
-        <v-container>
+    <div class="black">
+        <v-app-bar app>
             <v-layout wrap>
                 <v-flex sm12 md6 offset-md3>
                     <v-card elevation="4" light tag="section">
@@ -55,8 +55,9 @@
                         </v-layout>
                 </v-flex>
             </v-layout>
-        </v-container>
-    </v-app>
+
+    </v-app-bar>
+</div>
 </template>
 
 <script>
@@ -72,7 +73,6 @@ import cookies from 'vue-cookies'
                     emailMatch: () => ('The email and password you entered don\'t match')
                 },
                 showPassword: false,
-                darkTheme: true,
                 platformName: 'Login Form',
                 formData: {
                     username: "",
@@ -99,6 +99,10 @@ import cookies from 'vue-cookies'
 </script>
 
 <style scoped>
+.black {
+    background-color: black;
+    color: whitesmoke;
+}
 v-btn,
 v-card {
         border-radius: 4px;

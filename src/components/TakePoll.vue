@@ -1,6 +1,6 @@
 <template>
     
-      <v-app id="inspire">
+      <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
       <v-card
       class="overflow-y-auto"
       

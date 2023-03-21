@@ -1,6 +1,4 @@
 <template>
-    <v-app class="tipTop" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire"
-    >
     <div class="text-right">
         <v-menu offset-y bottom left >
             <template v-slot:activator="{ on, attrs }">
@@ -26,7 +24,6 @@
         </v-list>
     </v-menu>
 </div>
-    </v-app>
 </template>
 
 <script>

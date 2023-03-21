@@ -1,20 +1,72 @@
 <template>
-  <v-app>
+     <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+      <v-app-bar app
+     flat color="black" class="d-flex flex-row-reverse">
+                              <v-btn v-if="!isLoggedIn()" @click="login()" small color="whitesmoke" class="text-decoration-none" >
+                                      <router-link class="text-decoration-none" to="/login" >
+                                          Login
+                                          <v-icon class="text-decoration-none" append-icon-outer color="black">
+                                              mdi-login-variant
+                                          </v-icon>
+                                      </router-link>
+                              </v-btn>
+
+                              <v-btn v-if="!isLoggedIn()" 
+                                  @click="register()" small color="whitesmoke" class="text-decoration-none">
+                                      <router-link class="text-decoration-none" to="/register">
+                                          Sign up
+                                      </router-link>
+                              </v-btn>
+                              <DropDown v-if="isLoggedIn"/>
+      </v-app-bar>
         <v-main>
-        <router-link to="/">Home</router-link>
-        <router-view/>
+        <v-container fluid>
+          <router-view/>
+        </v-container >
       </v-main>
-      </v-app>
+       <v-footer  app>
+       </v-footer>
+    </v-app>
 </template>
 
 <script>
 import { RouterView } from 'vue-router';
+import cookies from 'vue-cookies';
+import DropDown from '@/components/DropDown.vue';
+
 export default {
   name: 'App',
-
+  components: {
+    RouterView,
+    DropDown
+  },
+  methods: {
+    isLoggedIn() {
+      let user = cookies.get('token')
+      if (user == null) {
+        return false
+      } else {
+        return true
+      }
+    },
+  },
+  mounted() {
+    this.isLoggedIn();
+    this.$root.$on('refresh')
+  },
   data: () => ({
     //
   }),
-      components: { RouterView }
 };
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+</style>
+<style scoped>
+
+.black {
+    background-color: black;
+    color: whitesmoke;
+}
+</style>

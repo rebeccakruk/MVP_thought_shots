@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <div>
         <h3>Create a poll! Pick a category:</h3>
         <v-container :key="cat.category"
                 :catId="cat.category"
@@ -7,8 +7,8 @@
                 outlined
                 tile v-for="cat in myPolls.filter(({ category }) => !uniqueValue[category] && (uniqueValue[category] = true))">
                 <router-link text-decoration-none to="/mypolls"><v-btn small>{{ cat.categoryName }}</v-btn></router-link>
-            </v-container>
-    </v-app>
+        </v-container>
+    </div>
 </template>
 
 <script>
@@ -23,8 +23,8 @@ import axios from 'axios';
                     category: "",
                     categoryName: ""
                 }]
-            }            
-        }, 
+            }
+        },
         methods: {
                 getCategories() {
                     axios.request({

@@ -1,44 +1,37 @@
 <template>
-    <v-app class="userprofile" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
-    
-<v-btn @click="toMyPolls()"><router-link to="/mypolls"></router-link></v-btn>
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
         <v-container>
-        Welcome {{ userInfo.username }}
-    </v-container>
+            Welcome {{ userInfo.username }}!
+        </v-container>
 
-    <!-- <v-container v-for="mine in minePolls" :key="mine.pollId" v-bind="mine" color="black">
-        
-        {{ mine.title }}
-        {{ minePolls.category }} -->
-    <v-card
-    class="overflow-y-auto"
-    max-height="300"
-        tile
-    >
-        <v-list dense
-         >
-          <h4>My Polls</h4>
-          <v-list-item-group
-            v-model="minePolls.title"
-            color="primary"
-          >
-            <v-list-item
-              v-for="mine in minePolls" :key="mine.pollId" v-bind="mine"
-            >
-              <v-list-item-icon>
-                <v-icon v-text="mine.title"
-                @click="goToPoll()"></v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title v-text="mine.description"></v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-card>
-    <!-- </v-container> -->
-    
-    </v-app>
+        <v-card
+                class="overflow-y-auto"
+                max-height="300"
+                tile
+                >
+            <v-list dense
+                >
+            <h4>My Polls</h4>
+                <v-list-item-group
+                    v-model="minePolls.title"
+                    color="primary"
+                >
+                    <v-list-item
+                        v-for="mine in minePolls" :key="mine.pollId" v-bind="mine"
+                    >
+                    <v-list-item-icon>
+                        <v-icon v-text="mine.title"
+                        @click="goToPoll()"></v-icon>
+                    </v-list-item-icon>
+                        <v-list-item-content>
+                            <v-list-item-title v-text="mine.description"></v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-item-group>
+            </v-list>
+        </v-card>
+
+    </div>
 </template>
 
 <script>
@@ -57,16 +50,6 @@ import cookies from 'vue-cookies'
             darkTheme: true,
                 userInfo : [],
                 minePolls: [],
-                    //     {
-                    //         category: "",
-                    //         categoryName: "",
-                    //         createdAt: "",
-                    //         description: "",
-                    //         expiry: "",
-                    //         pollId: Number,
-                    //         pollOwner: "",
-                    //         title: "",
-                    //     },
                 platformName: 'User Profile',
                 toggleDisable1: false,
                 toggleDisable2: false,
@@ -93,24 +76,24 @@ import cookies from 'vue-cookies'
                 }).finally(() =>{
                     console.log('here we are. not logged in.');
                 })
-            },
-            getMyPolls() {
-                let userToken = cookies.get('token')
-                console.log(userToken);
-                axios.request({
-                    url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-owner`,
-                    method: "GET",
-                    params: {
-                        "token": userToken
-                    }
-            }).then((response) => {
-                this.minePolls = response.data
-                console.log(response.data);
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
-                console.log('here we are. not logfgfdsgfdgged in.');
-            })
+            // },
+            // getMyPolls() {
+            //     let userToken = cookies.get('token')
+            //     console.log(userToken);
+            //     axios.request({
+            //         url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-owner`,
+            //         method: "GET",
+            //         params: {
+            //             "token": userToken
+            //         }
+            // }).then((response) => {
+            //     this.minePolls = response.data
+            //     console.log(response.data);
+            // }).catch((error) => {
+            //     console.log(error);
+            // }).finally(() => {
+            //     console.log('here we are. not logfgfdsgfdgged in.');
+            // })
         },
         goToPoll() {
             router.push('/')
@@ -126,8 +109,8 @@ import cookies from 'vue-cookies'
 </script>
 
 <style scoped>
-.userprofile {
-    max-height: 25em;
+.black {
+    max-height: 5em;
     border: 3px black;
     background-color: aqua;
 }

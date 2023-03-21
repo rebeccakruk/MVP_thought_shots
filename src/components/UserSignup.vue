@@ -1,9 +1,10 @@
 <template>
-        <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
-        <v-container>
+        <v-app >
+            <div class="black" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+        <v-container class="dark_grey">
                 <v-layout wrap>
                     <v-flex sm12 md6 offset-md3>
-                        <v-card elevation="4" light tag="section">
+                        <v-card class="dark" elevation="4" tag="section">
                             <v-card-title>
                                 <v-layout align-center justify-space-between>
                                     <h3 class="headline">
@@ -68,16 +69,18 @@
                     <v-divider></v-divider>
                             <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
                                     Already have an account?
-                                    <router-view to="/login">
-                                        <v-btn color="info"
+                                    <router-link style="text-decoration:none" to="/login">
+                                        <v-btn
+                                        color="black"
+                                        :large="$vuetify.breakpoint.smAndUp"
                                         text>
                                             Login
                                         </v-btn>
-                                    </router-view>
+                                    </router-link>
                         <v-spacer></v-spacer>
-                                    <router-link color="success" to="/">
+                                    <router-link style="text-decoration:none" color="success" to="/">
                                         <v-btn 
-                                            color="success" 
+                                            color="yellow" 
                                             :large="$vuetify.breakpoint.smAndUp" 
                                             @click="register()">
                                             Register
@@ -93,7 +96,7 @@
         
                         </v-layout>
             </v-container>
-    
+    </div>
         </v-app>
 </template>
 
@@ -136,6 +139,7 @@ import cookies from 'vue-cookies';
                             let id = response.data.userId
                             cookies.set('token', token)
                             cookies.set('userId', id)
+                            this.$emit('refresh')
                             router.push('/')
                         }).catch((error) => {
                             console.log(error);
@@ -147,5 +151,16 @@ import cookies from 'vue-cookies';
         </script>
 
 <style scoped>
+.black {
+    background-color: black;
+    color: whitesmoke;
+}
+.dark_grey {
+    background-color: rgba(250, 250, 242, 0.192);
+}
+
+.dark {
+    background-color: rgb(250, 250, 242);
+}
 
 </style>

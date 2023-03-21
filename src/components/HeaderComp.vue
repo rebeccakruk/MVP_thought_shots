@@ -1,23 +1,22 @@
 <template>
-    <div class="home">
-    
-        <nav>
-        <router-view/>
-                <h1>Thought-shots</h1>
-        <v-layout align-center justify-right>
-            <v-spacer>
-                <v-btn v-if="!isLoggedIn()" @click="login()" small fixed right class="text-decoration-none" >
-                        <router-link class="text-decoration-none" to="/login" black>Login<v-icon class="text-decoration-none" append-icon-outer color="black">mdi-login-variant</v-icon>
-                        </router-link>
-                </v-btn>
-
-                <v-btn v-if="!isLoggedIn()"  @click="register()" small right class="text-decoration-none">
-                    <router-link class="text-decoration-none" to="/register">Sign up</router-link>
-                </v-btn>
-            </v-spacer>
-            </v-layout>
-            </nav>
-    </div>
+    <div class="black" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
+                    <v-card v-if="!isLoggedIn"
+                        class="d-flex justify-center ma-4">
+                            <router-link to="/"><img max-height="300" min-height="300" src="../assets/logo_mvp.png"
+                                alt="logo">
+                            </router-link>
+                            <router-link to="/" style="text-decoration:none"><h1>Thought-shots.</h1></router-link>
+                        </v-card>
+                    <v-container
+                        :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" max-width="400"
+                            class="mx-auto">
+                            <router-link max-width="400" to="/"><v-img src="../assets/banner.png"
+                                alt="logo"></v-img>
+                            </router-link>
+                            <router-link max-width="400" to="/" style="text-decoration:none"><h1>Thought-shots.</h1></router-link>
+                            <h3>Find out what they (really) think.</h3>
+                    </v-container>
+        </div>
 </template>
 
 <script>
@@ -44,8 +43,18 @@ import cookies from 'vue-cookies'
 </script>
 
 <style scoped>
-.div {
-    background-color: aquamarine;
+.black {
+    height: 10%vh;
+}
+h1 {
+    font-family: 'Special Elite', cursive;
+    font-size: 5em;
+    color: lightgray;
+    max-width: "400px"
+}
+h3 {
+    font-family: 'Special Elite' cursive;
+    color: lightgray;
 }
 </style>
 
