@@ -1,22 +1,22 @@
 <template>
-    <div class="black">
+    <div class="black" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" id="inspire">
             <HeaderComp />
             <div max-height="20%vh">
-            <v-container v-if="!isLoggedIn()">
-                Welcome to thought-shots! Please login or sign up to view the polls you've created or participated in.
-            </v-container>
-            
-            <v-container v-if="!isLoggedIn()">
-                You must be logged in to create a poll
-            </v-container>
+                <v-container v-if="!isLoggedIn()">
+                    Welcome to thought-shots! Please login or sign up to view the polls you've created or participated in.
+                </v-container>
+
+                <v-container v-if="!isLoggedIn()">
+                    You must be logged in to create a poll
+                </v-container>
             </div>
             <nav>
                 <v-container v-if="isLoggedIn()">
                     <UserProfile />
                     <CreatePolls />
                 </v-container>
-                <PollsList/>
                 <router-view />
+                <PollsList/>
             </nav>
             <FooterComp />
     </div>

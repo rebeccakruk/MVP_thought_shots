@@ -1,26 +1,46 @@
 <template>
-        <v-app class="pollList" id="inspire">
+        <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire" class="pollList">
+            <div class="public">
     <h3>Public Polls</h3>
-        <v-container class="green lighten-5">
+    <v-switch
+        v-model="viewByCat"
+        hide-details
+        inset
+        :label="`View by category?`"
+    >
+    </v-switch>
+        </div>
+        <v-container v-if="viewByCat" class="green lighten-5">
             <v-row>
-            <v-col md="3">
-                <v-card :key="cat.category"
-                    :catId="cat.category"
-                    class="pa-2"
-                    outlined
-                    red
-                    tile v-for="cat in myPolls.filter(({category}) => !uniqueValue[category] && (uniqueValue[category] = true))"
-
-                >
-                <router-link to="/mypolls">{{ cat.categoryName }}</router-link>
-                
-                </v-card>
+                <v-col md="3">
+                    <v-card :key="cat.category"
+                        :catId="cat.category"
+                        class="pa-2"
+                        outlined
+                        red
+                        tile v-for="cat in myPolls.filter(({category}) => !uniqueValue[category] && (uniqueValue[category] = true))"
+                        >
+                            <router-link to="/mypolls">{{ cat.categoryName }}</router-link>
+                    </v-card>
             </v-col>
-            
             </v-row>
         </v-container>
-
-    </v-app>
+        <v-container v-if="!viewByCat" class="blue lighten-5">
+            <v-row>
+                <v-col md="3">
+                    <v-card :key="cat.category"
+                        :catId="cat.category"
+                        class="pa-2"
+                        outlined
+                        red
+                        tile v-for="cat in myPolls.filter(({category}) => !uniqueValue[category] && (uniqueValue[category] = true))"
+                        >
+                            <router-link to="/mypolls">{{ cat.categoryName }}</router-link>
+                    </v-card>
+            </v-col>
+            </v-row>
+        </v-container>
+    </div>
 
 </template>
 
@@ -32,6 +52,7 @@ import cookies from 'vue-cookies';
         data() {
             return {
                 uniqueValue: {},
+                viewByCat: false,
                 myPolls: [{
                     category: "",
                     categoryName: "",
@@ -90,10 +111,7 @@ import cookies from 'vue-cookies';
     height: 30%;
     background-color: beige;
 }
+.public {
+    color: black
+}
 </style>
-
-
-<!-- ten minutes talking about theoretical stuff, 20 minute coding exercise
-object oriented paradigm
-
--->

@@ -1,6 +1,5 @@
 <template>
-<div id="app">
-<v-app id="inspire">
+<div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
     <v-card>
     <v-toolbar
         flat
@@ -24,7 +23,7 @@
         v-model="pollCreateData.description"
         ></v-textarea>
 
-        <v-text-field
+        <!-- <v-text-field
             filled
             label="expiry"
             v-model="pollCreateData.expiry"
@@ -58,7 +57,7 @@
                         @change="changeValue(b)"
                     :disabled="selectedValue.length > 0 && selectedValue[0] != b"
                 ></v-checkbox>
-                <!-- <v-checkbox
+                <v-checkbox
                     label="anonymous"
                     color="indigo darken-3"
                     v-model="c"
@@ -66,20 +65,22 @@
                     @change="changeValue(c)"
                     :disabled="selectedValue.length > 0 && selectedValue[0] != c"
                 ></v-checkbox> -->
-                </v-col>
-                </v-row>
+                <!-- </v-col>
+                </v-row> -->
         </v-card-text>
 
     <v-divider></v-divider>
 
 <v-card-actions text-decoration-none>
         <v-spacer></v-spacer>
-        <v-btn @click="new_poll()"
-        color="success"
-        depressed
-        submit
-        >
-        <router-link to="/addquestions">Next</router-link></v-btn>
+            <v-btn 
+                @click="new_poll()"
+                color="success"
+                depressed
+                submit
+                >
+                Next
+            </v-btn>
         <!-- <v-btn
         color="primary"
         depressed
@@ -88,7 +89,6 @@
         </v-btn> -->
     </v-card-actions>
     </v-card>
-    </v-app>
 </div>
 </template>
 
@@ -153,7 +153,6 @@ import cookies from 'vue-cookies';
             this.pollCreateData.token = cookies.get('token');
         },
     }
-
 
 </script>
 

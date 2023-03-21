@@ -1,16 +1,14 @@
 <template>
     
-      <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+      <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
       <v-card
       class="overflow-y-auto"
-      
-          tile
-      >
-          <v-list dense
-          >
+        tile
+        >
+        <v-list dense
+        >
             <h4>Complete Poll</h4>
             <v-list-item-group
-
             color="primary"
             >
             {{ pollInfo.title }}
@@ -34,16 +32,15 @@
                     >
                     {{ answer.responseOption }}
                 </v-list-item>
-               
+            
                 </v-list-item-content>
             </v-list-item>
             </v-list-item-group>
         </v-list>
         <v-btn @click="submitPoll">Submit Poll</v-btn>
         </v-card>
-    hi  {{ selected }}
-      </v-app>
- 
+    </div>
+
 </template>
 
 <script>

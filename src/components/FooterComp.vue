@@ -1,5 +1,5 @@
 <template>
-       <div color="green" dark>
+    <div color="green" dark>
             <v-row justify="center" class="my-4 text-center">
                 <v-col cols="12">
                     Get started:</v-col>

@@ -22,6 +22,11 @@ const routes = [
     component: MainView
   },
   // {
+  //   path: '/polledit',
+  //   name: 'polledit',
+  //   component: PollEdit
+  // },
+  // {
   //   path: '/:catchAll(.*)*',
   //   name: 'pagenotfound',
   //   component: PageNotFound

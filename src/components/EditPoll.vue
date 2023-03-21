@@ -1,6 +1,5 @@
 <template>
-    <div id="app">
-    <v-app :class="{ 'pa-e': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+    <div :class="{ 'pa-e': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
         <v-container>
             <v-layout wrap>
                 <v-flex sm12 md6 offset-md3>
@@ -35,6 +34,26 @@
                                                     <v-icon flat :color="toggleDisable2 ? 'primary' : ' '"
                                                 @click="toggleDisable2 = !toggleDisable2">mdi-pencil</v-icon>
                             </v-layout>
+                            <v-layout align-center justify-space-between>
+                                            <v-text-field
+                                                filled
+                                                label="Question"
+                                                v-model="pollEditData.question"
+                                                :disabled="!toggleDisable1"
+                                            ></v-text-field>
+                                                    <v-icon flat :color="toggleDisable1 ? 'primary' : ' '"
+                                                @click="toggleDisable1 = !toggleDisable1">mdi-pencil</v-icon>
+                            </v-layout>
+                            <v-layout align-center justify-space-between>
+                                            <v-text-area
+                                                filled
+                                                label="Response Option"
+                                                v-model="pollEditData.responseOption"
+                                                :disabled="!toggleDisable2"
+                                            ></v-text-area>
+                                                    <v-icon flat :color="toggleDisable2 ? 'primary' : ' '"
+                                                @click="toggleDisable2 = !toggleDisable2">mdi-pencil</v-icon>
+                            </v-layout>
                             </v-form>
                         </v-card-text>
                         <v-divider></v-divider>
@@ -50,7 +69,6 @@
                 </v-flex>
             </v-layout>
         </v-container>
-        </v-app>
     </div>
 </template>
 
@@ -62,7 +80,6 @@ import router from '@/router';
         name: "EditPoll",
         data() {
             return {
-                darkTheme: true,
                 patchInfo: [],
                 pollEditData: {
                         category: "",

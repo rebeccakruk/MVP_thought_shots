@@ -1,5 +1,5 @@
 <template>
-    <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+    <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" id="inspire">
         <v-container>
             <v-layout wrap>
                 <v-flex sm12 md6 offset-md3>
@@ -71,7 +71,7 @@ export default {
     data() {
         return {
             showPassword: false,
-            darkTheme: true,
+            
             userInfo: [],
             formData: {
                 email: "",

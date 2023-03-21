@@ -1,6 +1,6 @@
 <template>
-    <div class="black">
-        <v-app-bar app>
+    <div class="black" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+
             <v-layout wrap>
                 <v-flex sm12 md6 offset-md3>
                     <v-card elevation="4" light tag="section">
@@ -56,7 +56,7 @@
                 </v-flex>
             </v-layout>
 
-    </v-app-bar>
+
 </div>
 </template>
 

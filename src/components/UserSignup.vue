@@ -1,5 +1,4 @@
 <template>
-        <v-app >
             <div class="black" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
         <v-container class="dark_grey">
                 <v-layout wrap>
@@ -16,7 +15,6 @@
                     <v-divider></v-divider>
                         <v-card-text>
                             <p>Create an account to create polls:</p>
-
                                 <v-form>
             <v-text-field 
                 v-model="formData.firstName" 
@@ -93,11 +91,9 @@
                             <v-layout align-center justify-space-between>
                             </v-layout>
                     </v-flex>
-        
                         </v-layout>
             </v-container>
     </div>
-        </v-app>
 </template>
 
 <script>
@@ -105,50 +101,49 @@ import router from 'vue-router';
 import axios from 'axios';
 import cookies from 'vue-cookies';
 
-    export default {
-        name: "UserSignup",
-            data() {
-                return {
-                    rules: {
-                        required: value => !!value || 'Required.',
-                        email: value => {
-                                const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                                return pattern.test(value) || 'Invalid e-mail.'
-                        }
-                    },
-                    formData: {
-                    firstName: "",
-                    lastName: "",
-                    username: "",
-                    password: "",
-                    email: "",
-                    dob: ""
-                },
-                platformName: "Sign-up Form",
-                darkTheme: true,
-            }
-        },
-            methods: {
-                register() {
-                    axios.post(
-                        process.env.VUE_APP_BASE_DOMAIN + '/api/user',
-                        this.formData,                        
-                        ).then((response) => {
-                            console.log(response);
-                            let token = response.data.token
-                            let id = response.data.userId
-                            cookies.set('token', token)
-                            cookies.set('userId', id)
-                            this.$emit('refresh')
-                            router.push('/')
-                        }).catch((error) => {
-                            console.log(error);
-                        })
+export default {
+    name: "UserSignup",
+        data() {
+            return {
+                rules: {
+                    required: value => !!value || 'Required.',
+                    email: value => {
+                            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            return pattern.test(value) || 'Invalid e-mail.'
                     }
+                },
+                formData: {
+                firstName: "",
+                lastName: "",
+                username: "",
+                password: "",
+                email: "",
+                dob: ""
+            },
+            platformName: "Sign-up Form",
+        }
+    },
+        methods: {
+            register() {
+                axios.post(
+                    process.env.VUE_APP_BASE_DOMAIN + '/api/user',
+                    this.formData,                        
+                    ).then((response) => {
+                        console.log(response);
+                        let token = response.data.token
+                        let id = response.data.userId
+                        cookies.set('token', token)
+                        cookies.set('userId', id)
+                        this.$emit('refresh')
+                        router.push('/')
+                    }).catch((error) => {
+                        console.log(error);
+                    })
                 }
-    }
-            
-        </script>
+            }
+}
+
+</script>
 
 <style scoped>
 .black {

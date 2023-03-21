@@ -3,25 +3,28 @@
         <v-card>
             <h2>{{ pollInfo.title }}</h2>
             <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
+            <PollEdit v-if="isEditing" v-bind:pollInfo="pollInfo"/>
             <TakePoll v-bind:pollInfo="pollInfo"/>
-
         </v-card>
         
 </div>
 </template>
 <script>
 import TakePoll from '@/components/TakePoll.vue';
+import PollEdit from '@/components/EditPoll.vue'
 import axios from 'axios';
 import cookies from 'vue-cookies';
     export default {
     name: "PollsPageView",
     components: {
-    TakePoll
+    TakePoll,
+    PollEdit
 },
     data() {
         return {
             uniqueValue: {},
             pollInfo: [],
+            isEditing: true
                 // pollInfo:{
                 //     title: "",
                 //     responseId: [],
@@ -40,8 +43,8 @@ import cookies from 'vue-cookies';
             url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-user`,
             method: "GET",
             params: {
-                "pollId": 92,
-                "token" : this.token
+                // "pollId": 92,
+                // "token" : this.token
             },
             }).then((response) => {
                 this.pollInfo = response.data
@@ -52,9 +55,11 @@ import cookies from 'vue-cookies';
             },
                 beforeMount () {
                     this.token = cookies.get('token')
+                    this.poll_id = cookies.get('pollId')
             },
         },mounted () {
             this.getQandAs();
+
     },
 }
     

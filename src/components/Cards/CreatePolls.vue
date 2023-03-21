@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
         <h3>Create a poll! Pick a category:</h3>
         <v-container :key="cat.category"
                 :catId="cat.category"
@@ -14,43 +14,44 @@
 <script>
 import axios from 'axios';
 
-    export default {
-        name : "CreatePolls",
-        data() {
-            return {
-                uniqueValue: {},
-                myPolls: [{
-                    category: "",
-                    categoryName: ""
-                }]
+export default {
+    name : "CreatePolls",
+    data() {
+        return {
+            uniqueValue: {},
+            myPolls: [{
+                category: "",
+                categoryName: ""
+            }]
+        }
+    },
+    methods: {
+            getCategories() {
+                axios.request({
+                        url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
+                        method: "GET",
+                        params: {
+                            "categoryName": this.categoryName
+                        }
+                }).then((response) => {
+                    this.myPolls = response.data
+                    console.log(response.data);
+                }).catch((error) => {
+                    console.log(error);
+                })
             }
         },
-        methods: {
-                getCategories() {
-                    axios.request({
-                            url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
-                            method: "GET",
-                            params: {
-                                "categoryName": this.categoryName
-                            }
-                    }).then((response) => {
-                        this.myPolls = response.data
-                        console.log(response.data);
-                    }).catch((error) => {
-                        console.log(error);
-                    })
-            }
+            beforeMount () {
+                this.token = this.cookies.get('token')
+                    if (this.token == null) {
+                        return false
+                    }
+                },
+                mounted () {
+                    this.getCategories();
         },
-        beforeMount () {
-            this.token = this.cookies.get('token')
-                if (this.token == null) {
-                    return false
-                }
-            },
-            mounted () {
-                this.getCategories();
-        },
-    }
+}
+
 </script>
 
 <style scoped>

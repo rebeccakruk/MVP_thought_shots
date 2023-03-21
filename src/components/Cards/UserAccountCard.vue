@@ -1,5 +1,5 @@
 <template>
-        <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+        <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
             <v-container>
                 <v-layout wrap>
                     <v-flex sm12 md6 offset-md3>
@@ -57,7 +57,7 @@
                     </v-flex>
                 </v-layout>
             </v-container>
-        </v-app>
+        </div>
 </template>
 
 <script>

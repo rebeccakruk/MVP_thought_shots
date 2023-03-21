@@ -1,10 +1,10 @@
 <template>
-    <v-app>
-        <p>HI. This is where you add questions and options.</p>
-    <div>
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+
+        <p>This is where you add questions and options.</p>
                                 <h2>{{ newQuestion }}</h2>
                         
-                            <div v-for="(option, index) in optionsList" :key="index" v-bind="option"><h3>{{ option }}</h3></div>
+                            <div v-for="(option, index) in optionsList" :key="index" v-bind="option"><h3>{{ option }}</h3>
                             </div>
         <v-card>
                 <v-form>
@@ -24,7 +24,7 @@
                             >Add
                         </v-btn>
                     </v-card-actions>
-    </div>
+                    </div>
                         <v-text-field
                                 outline
                                 label="response option"
@@ -57,7 +57,7 @@
                 </v-form>
         </v-card>
 
-    </v-app>
+    </div>
 </template>
 
 <script>

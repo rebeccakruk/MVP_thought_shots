@@ -17,7 +17,7 @@
                                           Sign up
                                       </router-link>
                               </v-btn>
-                              <DropDown v-if="isLoggedIn"/>
+                              <DropDown v-if="isLoggedIn()"/>
       </v-app-bar>
         <v-main>
         <v-container fluid>

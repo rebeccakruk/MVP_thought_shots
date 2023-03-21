@@ -1,7 +1,7 @@
 <template>
     <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
         <v-container>
-            Welcome {{ userInfo.username }}!
+            Welcome {{ userInfo.username }}
         </v-container>
 
         <v-card
@@ -17,11 +17,12 @@
                     color="primary"
                 >
                     <v-list-item
-                        v-for="mine in minePolls" :key="mine.pollId" v-bind="mine"
+                        v-for="mine in minePolls" :key="mine.pollId" v-bind:mine="mine"
                     >
                     <v-list-item-icon>
                         <v-icon v-text="mine.title"
-                        @click="goToPoll()"></v-icon>
+                        v-model="selected"
+                        @click="goToPoll(mine.pollId)"></v-icon>
                     </v-list-item-icon>
                         <v-list-item-content>
                             <v-list-item-title v-text="mine.description"></v-list-item-title>
@@ -50,6 +51,8 @@ import cookies from 'vue-cookies'
             darkTheme: true,
                 userInfo : [],
                 minePolls: [],
+                selected: [],
+                pollEditInfo: [],
                 platformName: 'User Profile',
                 toggleDisable1: false,
                 toggleDisable2: false,
@@ -76,27 +79,52 @@ import cookies from 'vue-cookies'
                 }).finally(() =>{
                     console.log('here we are. not logged in.');
                 })
-            // },
-            // getMyPolls() {
-            //     let userToken = cookies.get('token')
-            //     console.log(userToken);
-            //     axios.request({
-            //         url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-owner`,
-            //         method: "GET",
-            //         params: {
-            //             "token": userToken
-            //         }
-            // }).then((response) => {
-            //     this.minePolls = response.data
-            //     console.log(response.data);
-            // }).catch((error) => {
-            //     console.log(error);
-            // }).finally(() => {
-            //     console.log('here we are. not logfgfdsgfdgged in.');
-            // })
+            },
+            getMyPolls() {
+                let userToken = cookies.get('token')
+                console.log(userToken);
+                axios.request({
+                    url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-owner`,
+                    method: "GET",
+                    params: {
+                        "token": userToken
+                    }
+            }).then((response) => {
+                this.minePolls = response.data
+                console.log(response.data);
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('no polls here');
+            })
         },
-        goToPoll() {
-            router.push('/')
+        goToPoll(pollId) {
+            console.log(pollId, 'pollId');
+            this.selected.push( pollId );
+            this.selectedThisPole();
+            console.log(this.selected, 'selected');
+        },
+        selectedThisPole() {
+                this.poll_id = this.selected.pop()
+                let userToken = cookies.get('token')
+                console.log(userToken, this.poll_id);
+                axios.request({
+                    url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-owner`,
+                    method: "GET",
+                    params: {
+                        "token": userToken,
+                        "pollId": this.poll_id
+                    }
+                }).then((response) => {
+                    let pollId = response.data[0].pollId
+                    pollId = cookies.set('pollId', pollId)
+                    console.log(pollId, 'pollId');
+                    router.push('/pollsView')
+                }).catch((error) => {
+                    console.log(error);
+                }).finally(() => {
+                    console.log('no polls here');
+                })
         }
     
     },
