@@ -60,7 +60,7 @@
             methods: {
               submitResponse(questionId, responseId) {
                 // post here
-                // or emit here and manage the cart. FUUUUUUUUUUUCKKKKKK
+                // or emit here and manage the cart.
               }
             },
         }    
