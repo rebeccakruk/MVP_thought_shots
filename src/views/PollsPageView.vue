@@ -1,54 +1,40 @@
 <template>
     <div id="app">
-        <h1>WHAT THE HECK REBECCA</h1>
-        <h2>{{ pollInfo.title }}</h2>
-        <!-- there will be a listing here of available polls and the option to participate in one -->
-        <!-- this will be prettier than the categories. OR do the polls appear under the selection on the mainview. ... design categories -->
-        <!-- <PollSelect v-for="question in poll" :key="question.id" :response="question.responseOptionId"/> -->
-        <!-- <div v-for="question in data" :key="question.questionId" v-bind="question">
-            <h4>{{ question }}</h4>
-            <v-btn>{{ responseOption }}</v-btn>
-        </div> -->
         <v-card>
-        <v-list v-for="poll in pollInfo.filter(({ questionId}) => !uniqueValue[questionId] && (uniqueValue[questionId] = true))" 
-        :key="poll.questionId" :title="poll.title" :question="poll.question" @click="select(option)">
-            {{ poll.title }}
-            {{ poll.description }}
-            {{ poll.question }}
-            {{ poll.responseId }}
-            {{ poll.responseOption[0] }}
-        </v-list>
-    </v-card>
-    
+            <h2>{{ pollInfo.title }}</h2>
+            <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
+            <TakePoll v-bind:pollInfo="pollInfo"></TakePoll>
+        </v-card>
+
+
 
 </div>
 </template>
 <script>
 // import PollSelect from '@/components/Cards/PollSelect.vue';
-// import TakePoll from '@/components/TakePoll.vue';
+import TakePoll from '@/components/TakePoll.vue';
 import axios from 'axios';
 import cookies from 'vue-cookies';
     export default {
     name: "PollsPageView",
     components: {
-    // TakePoll
+    TakePoll
 },
     data() {
         return {
             uniqueValue: {},
-                pollInfo:{
-                    title: "",
-                    responseId: [],
-                    responseOption: [],
-                    pollId: "",
-                    question: "",
-                    questionId: "",
-                    description: "",
-                    token: ""
-                    },
-                qaInfo: [],
-                options: [],
-                selection: ""
+            pollInfo: [],
+                // pollInfo:{
+                //     title: "",
+                //     responseId: [],
+                //     responseOption: [],
+                //     pollId: "",
+                //     question: "",
+                //     questionId: "",
+                //     description: "",
+                //     token: ""
+                //     },
+                voted: false
     }
 },
     methods: {
