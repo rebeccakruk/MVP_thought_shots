@@ -42,7 +42,7 @@ import cookies from 'vue-cookies'
 
 
     export default {
-        name: "UserProfile",
+        name: "UserPollsList",
         components: {
 },
         data() {

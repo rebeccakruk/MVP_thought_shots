@@ -10,7 +10,7 @@ import AddQuestions from '../components/AddQuestions.vue'
 import UserPage from '../views/UserPage.vue'
 import UserLogout from '../components/UserLogout.vue'
 import UserSignup from '../components/UserSignup.vue'
-import UserProfile from '../components/UserProfile.vue'
+import UserPollsList from '../components/UserPollsList.vue'
 import EditPoll from '../components/EditPoll.vue'
 import UserEdit from '../components/UserEdit.vue'
 
@@ -68,9 +68,9 @@ const routes = [
     component : UserSignup
   },
   {
-    path: '/userprofile',
-    name: 'user',
-    component : UserProfile
+    path: '/userpollslist',
+    name: 'userpollslist',
+    component : UserPollsList
   },
   {
     path: '/editprofile',

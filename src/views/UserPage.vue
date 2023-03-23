@@ -1,7 +1,7 @@
 <template>
     <div>
         <UserLogin/>
-        <UserLogout/>
+        <UserLogout v-if="isLoggedIn()"/>
     </div>
 </template>
 

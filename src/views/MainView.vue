@@ -1,7 +1,27 @@
 <template>
-    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" id="inspire">
-            <div max-height="20%vh">
-                <v-container class="black"  v-if="!isLoggedIn()">
+    <div class="black" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" id="inspire">
+                        <!-- <v-btn v-if="!isLoggedIn()" @click="login()" small color="whitesmoke" class="text-decoration-none" >
+                        <router-link class="text-decoration-none" to="/userpage" >
+                                Login
+                            <v-icon class="text-decoration-none" append-icon-outer color="black">
+                                    mdi-login-variant
+                            </v-icon>
+                        </router-link>
+                    </v-btn>
+
+                    <v-btn v-if="!isLoggedIn()" 
+                        @click="register()"
+                        small 
+                        color="whitesmoke" 
+                        class="text-decoration-none">
+                            <router-link
+                                class="text-decoration-none" 
+                                to="/userpage">
+                                Sign up
+                            </router-link>
+                    </v-btn> -->        <HeaderComp/>
+            <div max-height="20vh">
+                <v-container v-if="!isLoggedIn()">
                     Welcome to thought-shots! Please login or sign up to view the polls you've created or participated in.
                 </v-container>
 
@@ -11,30 +31,31 @@
             </div>
             <nav>
                 <v-container v-if="isLoggedIn()">
-                    <UserProfile />
+                    <UserPollsList />
                     <CreatePolls />
                 </v-container>
                 <router-view />
                 <PollsList/>
             </nav>
-            <FooterComp />
+
     </div>
 </template>
 
 <script>
-import UserProfile from '../components/UserProfile.vue';
+import UserPollsList from '../components/UserPollsList.vue';
 import CreatePolls from '../components/Cards/CreatePolls.vue';
 import PollsList from '@/components/Cards/PollsList.vue';
-import FooterComp from '../components/FooterComp.vue';
+import HeaderComp from '@/components/HeaderComp.vue';
+
 import cookies from 'vue-cookies';
 
     export default {
     name: "MainView",
     components: {
-    UserProfile,
-    PollsList,
-    FooterComp,
-    CreatePolls
+        HeaderComp,
+        UserPollsList,
+        PollsList,
+        CreatePolls
 },
         methods: {
             isLoggedIn() {
