@@ -1,35 +1,38 @@
 <template>
-    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
-        <v-container>
-            Welcome {{ userInfo.username }}
-        </v-container>
-
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" app>
+            <h2>Welcome {{ userInfo.username }}!</h2>
         <v-card
-                class="overflow-y-auto"
-                max-height="300"
+                class="mx-auto"
                 tile
                 >
-            <v-list dense
-                >
+                
+         
             <h4>My Polls</h4>
+                <v-list
+                two-line>
                 <v-list-item-group
-                    v-model="minePolls.title"
-                    color="primary"
-                >
-                    <v-list-item
-                        v-for="mine in minePolls" :key="mine.pollId" v-bind:mine="mine"
-                    >
-                    <v-list-item-icon>
-                        <v-icon v-text="mine.title"
-                        v-model="selected"
-                        @click="goToPoll(mine.pollId)"></v-icon>
-                    </v-list-item-icon>
-                        <v-list-item-content>
-                            <v-list-item-title v-text="mine.description"></v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                </v-list-item-group>
-            </v-list>
+            v-model="selected"
+
+            multiple>
+                <template>v-for="mine in minePolls" 
+                :key="mine.pollId" 
+                v-bind:mine="mine">
+      <v-list-item-content>
+        <v-list-item-title  
+        active-color="pink"
+        v-text="mine.title"
+        v-model="selected"
+
+        @click="goToPoll(mine.pollId)">
+                        </v-list-item-title>
+        <v-list-item-subtitle 
+        v-text="mine.description">  
+        </v-list-item-subtitle>
+      </v-list-item-content>
+      </template>
+      </v-list-item-group>
+    </v-list>
+       
         </v-card>
 
     </div>
@@ -119,7 +122,7 @@ import cookies from 'vue-cookies'
                     let pollId = response.data[0].pollId
                     pollId = cookies.set('pollId', pollId)
                     console.log(pollId, 'pollId');
-                    router.push('/pollsView')
+                    router.go()
                 }).catch((error) => {
                     console.log(error);
                 }).finally(() => {
@@ -137,11 +140,7 @@ import cookies from 'vue-cookies'
 </script>
 
 <style scoped>
-.black {
-    max-height: 5em;
-    border: 3px black;
-    background-color: aqua;
-}
+
 
 </style>
 

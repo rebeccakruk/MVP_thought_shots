@@ -1,15 +1,18 @@
 <template>
-    <div>
-        <PollSelect/>
-    </div>
+<v-app>
+        <UserPollsList/>
+        <!-- <PollSelect/> -->
+   </v-app>
 </template>
 
 <script>
-import PollSelect from '@/components/Cards/PollSelect.vue';
+import UserPollsList from '@/components/UserPollsList.vue';
+// import PollSelect from '@/components/Cards/PollSelect.vue';
     export default {
         name: "OwnerPoll",
         components : {
-            PollSelect
+            // PollSelect,
+            UserPollsList
         }      
     }
 </script>

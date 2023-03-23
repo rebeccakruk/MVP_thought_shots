@@ -1,9 +1,10 @@
 <template>
-<div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+<div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" >
     <v-card>
     <v-toolbar
         flat
-        color="blue-grey"
+        color="black"
+        outlined
         dark
     >
         <v-toolbar-title>Create a poll</v-toolbar-title>
@@ -23,50 +24,6 @@
         v-model="pollCreateData.description"
         ></v-textarea>
 
-        <!-- <v-text-field
-            filled
-            label="expiry"
-            v-model="pollCreateData.expiry"
-            ></v-text-field>
-
-            <v-text-field
-                filled
-                label="limits"
-                v-model="pollCreateData.limits"
-                ></v-text-field>
-
-        <v-row>
-                <v-col
-                cols="12"
-                sm="4"
-                md="4"
-                >
-    <v-checkbox
-                    label="public"
-                    color="indigo darken-3"
-
-                    hide-details
-                    @change="changeValue(a)"
-                    :disabled="selectedValue.length > 0 && selectedValue[0] != a"
-                ></v-checkbox>
-                <v-checkbox
-                    label="private"
-                    color="indigo darken-3"
-
-                    hide-details
-                        @change="changeValue(b)"
-                    :disabled="selectedValue.length > 0 && selectedValue[0] != b"
-                ></v-checkbox>
-                <v-checkbox
-                    label="anonymous"
-                    color="indigo darken-3"
-                    v-model="c"
-                    hide-details
-                    @change="changeValue(c)"
-                    :disabled="selectedValue.length > 0 && selectedValue[0] != c"
-                ></v-checkbox> -->
-                <!-- </v-col>
-                </v-row> -->
         </v-card-text>
 
     <v-divider></v-divider>
@@ -81,12 +38,6 @@
                 >
                 Next
             </v-btn>
-        <!-- <v-btn
-        color="primary"
-        depressed
-        >
-        Save
-        </v-btn> -->
     </v-card-actions>
     </v-card>
 </div>

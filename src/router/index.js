@@ -3,14 +3,13 @@ import VueRouter from 'vue-router'
 import MainView from '../views/MainView.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 import MyPolls from '../views/MyPolls.vue'
-import OwnerPoll from '../views/OwnerPoll.vue'
+import OwnerPoll from '@/views/OwnerPoll.vue'
 import PollsPageView from '../views/PollsPageView.vue'
 import UserLogin from '../components/UserLogin.vue'
 import AddQuestions from '../components/AddQuestions.vue'
 import UserPage from '../views/UserPage.vue'
 import UserLogout from '../components/UserLogout.vue'
 import UserSignup from '../components/UserSignup.vue'
-import UserPollsList from '../components/UserPollsList.vue'
 import EditPoll from '../components/EditPoll.vue'
 import UserEdit from '../components/UserEdit.vue'
 
@@ -26,11 +25,6 @@ const routes = [
     path: '/userpage',
     name: 'userpage',
     component: UserPage
-  },
-  {
-    path: '/:catchAll(.*)*',
-    name: 'pagenotfound',
-    component: PageNotFound
   },
   { 
     path: '/mypolls',
@@ -68,11 +62,6 @@ const routes = [
     component : UserSignup
   },
   {
-    path: '/userpollslist',
-    name: 'userpollslist',
-    component : UserPollsList
-  },
-  {
     path: '/editprofile',
     name: 'edit',
     component : UserEdit
@@ -81,6 +70,11 @@ const routes = [
     path: '/editpoll',
     name: 'editpoll',
     component : EditPoll
+  },
+  {
+    path: '/:catchAll(.*)*',
+    name: 'pagenotfound',
+    component: PageNotFound
   },
 ]
 

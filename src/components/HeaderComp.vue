@@ -1,23 +1,23 @@
 <template>
     <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
         <div v-if="!isLoggedIn()">
-                            <v-card class="black" 
-                        >
-                            <router-link to="/"><img max-height="200" src="../assets/logo_mvp.png"
-                                alt="logo">
-                            </router-link>
-                            <router-link to="/" style="text-decoration:none"><h1>Thought-shots.</h1></router-link>
-                            </v-card>
-    </div>
-    <div v-if="isLoggedIn()">
-                    <v-card v-if="isLoggedIn()"
-                        :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" max-width="400"
-                            class="mx-auto">
-                            <router-link max-width="400" to="/"><v-img src="../assets/banner.png"
+                            <v-card class="mx-auto" color="black"
+                        ><v-row justify="center" class="my-4 text-center">
+                            <router-link to="/"><v-img aspect-ratio max-width="267" src="../assets/logo_mvp.png"
                                 alt="logo"></v-img>
                             </router-link>
-                            <router-link max-width="400" to="/" style="text-decoration:none"><h1>Thought-shots.</h1></router-link>
-                            <h3>Find out what they (really) think.</h3>
+                            <router-link to="/" style="text-decoration:none"><h1>Thought-shots. <h3>Find out what they (really) think.</h3></h1></router-link></v-row>
+                            </v-card>
+    </div>
+    <div class="black" v-else>
+                    <v-card color="black"
+                        :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" max-width="400"
+                            class="mx-auto">
+                            <router-link class="black" max-width="400" max-height="200" to="/"><v-img src="../assets/banner.png"
+                                alt="logo"></v-img>
+                            </router-link>
+                            <router-link class="black" max-width="400" to="/" style="text-decoration:none"><h1>Thought-shots.</h1></router-link>
+                            
                     </v-card>
     </div>
         </div>
@@ -47,20 +47,18 @@ import cookies from 'vue-cookies'
 </script>
 
 <style scoped>
-.black {
-    height: 10%vh;
-    background-color: black;
-    color: whitesmoke;
-}
 
 h1 {
     font-family: 'Special Elite', cursive;
-    font-size: 3em;
+    background-color: black;
+    font-size: 2.75em;
     color: lightgray;
-    max-width: "400"
+    width: "100%"
 }
 h3 {
     font-family: 'Special Elite' cursive;
+    font-size: 1.5rem;
+    background-color: black;
     color: lightgray;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
-     <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
-      <v-app-bar app class="black">
-    <v-btn v-if="!isLoggedIn()" @click="goToLogin()" small color="whitesmoke" class="text-decoration-none" >
+     <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" >
+      <v-app-bar class="black">
+        <div v-if="!isLoggedIn()">
+                    <v-btn small color="whitesmoke" class="text-decoration-none" >
                         <router-link class="text-decoration-none" to="/userpage" >
                                 Login
                             <v-icon class="text-decoration-none" append-icon-outer color="black">
@@ -10,48 +11,48 @@
                         </router-link>
                     </v-btn>
 
-                    <v-btn v-if="!isLoggedIn()" 
-                        @click="goToRegister()"
+                    <v-btn 
                         small 
-                        color="whitesmoke" 
+                        color="whitesmoke"
                         class="text-decoration-none">
                             <router-link
-                                class="text-decoration-none" 
+                                class="text-decoration-none"
                                 to="/userpage">
                                 Sign up
                             </router-link>
                     </v-btn>
+                </div>
+                <div v-else>
+                    <DropDown/>
+                </div>
       </v-app-bar>
-      <v-container>
+    
         <HeaderComp/>
-      </v-container>
-  
+      
         <v-main>
-        <v-container>
+        <v-container fluid>
           <router-view></router-view>
         </v-container >
       </v-main>
-       <v-footer color="green" dark app>
-<FooterComp/>
-       </v-footer>
+            <FooterComp/>
+
     </v-app>
 </template>
 
 <script>
 import HeaderComp from './components/HeaderComp.vue';
+import DropDown from './components/DropDown.vue';
 import FooterComp from './components/FooterComp.vue';
 import cookies from 'vue-cookies';
-import router from './router';
+
 export default {
   name: 'App',
 components: {
     HeaderComp,
+    DropDown,
     FooterComp
 },
-  data: () => ({
-    //
-  }),
-    methods: {
+methods: {
         isLoggedIn() {
             let user = cookies.get('token')
             if (user == null) {
@@ -61,29 +62,39 @@ components: {
 
             }
         },
-        beforeMount() {
-            this.isLoggedIn();
-        },
-        goToLogin() {
-            router.push('/userpage')
-        },
-        goToRegister() {
-            router.push('/userpage')
-        }
-    },
+},
     mounted() {
         this.isLoggedIn();
     },
-};
+  data: () => ({
+    //
+  }),
+    // },
+}
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 </style>
 <style scoped>
-
-.black {
+#app {
+    background-color: black;
+    margin: 0%;
+    padding: 0%;
+    color: whitesmoke;
+    position: relative;
+}
+body, html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+body {
     background-color: black;
     color: whitesmoke;
+}
+.black {
+    background-color: black;
 }
 </style>

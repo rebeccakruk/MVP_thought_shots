@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
         <v-card>
             <div>
                 <h1>{{ title }}</h1>

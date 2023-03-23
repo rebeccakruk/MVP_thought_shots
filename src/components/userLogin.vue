@@ -41,11 +41,11 @@
                                     Forgot password?
                                 </v-btn>
                     <v-spacer></v-spacer>
-                                <router-link to="/">
+                                
                                     <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="login()">
                                         Login
                                     </v-btn>
-                                </router-link>
+                                
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-// import router from '@/router';
+import router from '@/router';
 import axios from 'axios';
 import cookies from 'vue-cookies'
     export default {
@@ -89,6 +89,7 @@ import cookies from 'vue-cookies'
                     let id = response.data.userId
                     cookies.set('token', token)
                     cookies.set('userId', id)
+                    router.push('/ownerpoll')
                 }).catch((error) => {
                     console.log(error);
                 })
