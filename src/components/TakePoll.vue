@@ -1,8 +1,8 @@
 <template>
     
-      <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
-      <v-card
-      class="overflow-y-auto"
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+    <v-card
+        class="overflow-y-auto"
         tile
         >
         <v-list dense

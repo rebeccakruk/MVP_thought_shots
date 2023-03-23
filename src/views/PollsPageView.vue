@@ -5,6 +5,7 @@
             <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
             <PollEdit v-if="isEditing" v-bind:pollInfo="pollInfo"/>
             <TakePoll v-bind:pollInfo="pollInfo"/>
+            <v-btn @click="getQandAs">try it out!</v-btn>
         </v-card>
         
 </div>
@@ -43,8 +44,8 @@ import cookies from 'vue-cookies';
             url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-user`,
             method: "GET",
             params: {
-                // "pollId": 92,
-                // "token" : this.token
+                "pollId": 92,
+                "token" : this.token
             },
             }).then((response) => {
                 this.pollInfo = response.data

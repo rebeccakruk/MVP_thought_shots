@@ -1,9 +1,16 @@
 <template>
     <div>
         <v-form>
-            <v-card-actions>
-                <v-btn @click="logout()">Logout</v-btn>
-            </v-card-actions>
+                <v-card
+                            class="d-flex justify-center ma-4">
+                                <router-link to="/"><img max-height="300" min-height="300" src="../assets/head_drawing.png"
+                                    alt="logo">
+                                </router-link>
+                                <router-link to="/" style="text-decoration:none"><h1>Thought-shots.</h1></router-link>
+                            </v-card>
+                            
+                            <v-btn max-width="100" @click="logout()">Logout</v-btn>
+
         </v-form>
     </div>
 </template>

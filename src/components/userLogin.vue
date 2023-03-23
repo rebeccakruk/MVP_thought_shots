@@ -1,6 +1,5 @@
 <template>
-    <div class="black" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
-
+    <div class="black" :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
             <v-layout wrap>
                 <v-flex sm12 md6 offset-md3>
                     <v-card elevation="4" light tag="section">
@@ -110,4 +109,12 @@ v-card {
 v-card__title {
             text-transform: uppercase;
             }
+
+.ovrly{
+	background-color: #000;
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	opacity: 0.7;}
 </style>

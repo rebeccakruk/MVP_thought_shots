@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainView from '../views/MainView.vue'
-// import PageNotFound from '@/views/PageNotFound.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
 import MyPolls from '../views/MyPolls.vue'
 import OwnerPoll from '../views/OwnerPoll.vue'
 import PollsPageView from '../views/PollsPageView.vue'
 import UserLogin from '../components/UserLogin.vue'
 import AddQuestions from '../components/AddQuestions.vue'
+import UserPage from '../views/UserPage.vue'
 import UserLogout from '../components/UserLogout.vue'
 import UserSignup from '../components/UserSignup.vue'
 import UserProfile from '../components/UserProfile.vue'
@@ -21,16 +22,16 @@ const routes = [
     name: 'home',
     component: MainView
   },
-  // {
-  //   path: '/polledit',
-  //   name: 'polledit',
-  //   component: PollEdit
-  // },
-  // {
-  //   path: '/:catchAll(.*)*',
-  //   name: 'pagenotfound',
-  //   component: PageNotFound
-  // },
+  {
+    path: '/userpage',
+    name: 'userpage',
+    component: UserPage
+  },
+  {
+    path: '/:catchAll(.*)*',
+    name: 'pagenotfound',
+    component: PageNotFound
+  },
   { 
     path: '/mypolls',
     name: 'mypolls',

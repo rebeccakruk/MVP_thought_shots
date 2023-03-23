@@ -1,12 +1,11 @@
 <template>
         <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire" class="pollList">
             <div class="public">
-    <h3>Public Polls</h3>
-    <v-switch
+    <h3>Public Polls</h3><v-switch
         v-model="viewByCat"
         hide-details
         inset
-        :label="`View by category?`"
+        :label="`View all`"
     >
     </v-switch>
         </div>
@@ -20,7 +19,7 @@
                         red
                         tile v-for="cat in myPolls.filter(({category}) => !uniqueValue[category] && (uniqueValue[category] = true))"
                         >
-                            <router-link to="/mypolls">{{ cat.categoryName }}</router-link>
+                            <router-link to="/takepoll">{{ cat.categoryName }}</router-link>
                     </v-card>
             </v-col>
             </v-row>
