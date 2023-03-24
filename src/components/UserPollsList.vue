@@ -4,24 +4,19 @@
         <v-card
                 class="mx-auto"
                 tile
+                width="100%"
                 >
-                
-         
-            <h4>My Polls</h4>
                 <v-list
                 two-line>
                 <v-list-item-group
             v-model="selected"
-
-            multiple>
-                <template>v-for="mine in minePolls" 
+            >
+                <v-list-item v-for="mine in minePolls" 
                 :key="mine.pollId" 
                 v-bind:mine="mine">
-      <v-list-item-content>
+    <v-list-item-content>
         <v-list-item-title  
-        active-color="pink"
         v-text="mine.title"
-        v-model="selected"
 
         @click="goToPoll(mine.pollId)">
                         </v-list-item-title>
@@ -29,7 +24,7 @@
         v-text="mine.description">  
         </v-list-item-subtitle>
       </v-list-item-content>
-      </template>
+    </v-list-item>
       </v-list-item-group>
     </v-list>
        

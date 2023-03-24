@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <v-card>
+            <h2>Poll ID # {{ $route.params.pollId }}</h2>
             <h2>{{ pollInfo.title }}</h2>
             <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
             <PollEdit v-if="isEditing" v-bind:pollInfo="pollInfo"/>
@@ -44,7 +45,7 @@ import cookies from 'vue-cookies';
             url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-user`,
             method: "GET",
             params: {
-                "pollId": 92,
+                pollId: this.$route.params.pollId,
                 "token" : this.token
             },
             }).then((response) => {

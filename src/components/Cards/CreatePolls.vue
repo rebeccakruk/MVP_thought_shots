@@ -15,6 +15,7 @@
 
 <script>
 import axios from 'axios';
+import cookies from 'vue-cookies';
 
 export default {
     name : "CreatePolls",
@@ -43,16 +44,18 @@ export default {
                 })
             }
         },
-            beforeMount () {
-                this.token = this.cookies.get('token')
-                    if (this.token == null) {
-                        return false
-                    }
-                },
+        isLoggedIn() {
+        let user = cookies.get('token')
+        if (user == null) {
+            return false
+        } else {
+            return true
+        }
+    },
                 mounted () {
                     this.getCategories();
-        },
-}
+        }
+    }
 
 </script>
 
