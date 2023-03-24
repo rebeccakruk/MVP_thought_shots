@@ -1,8 +1,6 @@
 <template>
-    
-    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" >
     <v-card
-        class="overflow-y-auto"
         tile
         >
         <v-list dense
@@ -11,7 +9,7 @@
             <v-list-item-group
             color="primary"
             >
-            {{ pollInfo.title }}
+            Hello
             <!-- new question in the poll -->
             <v-list-item
                 v-for="question in pollInfo" :key="question.questionId"  
@@ -64,11 +62,6 @@ import axios from 'axios';
                         console.log(questionId, 'questionId');
                         console.log(this.selected, 'selected');
                         console.log(this.answerBank, 'answerbank', this.answerBank);
-
-                    //     console.log('just checking');
-                    //     console.log(questionId);
-                    //     console.log(responseOption);
-                    // }
                     }, 
                     submitPoll() {
                         axios.post(

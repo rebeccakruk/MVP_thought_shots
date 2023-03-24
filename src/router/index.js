@@ -5,6 +5,7 @@ import PageNotFound from '@/views/PageNotFound.vue'
 import MyPolls from '../views/MyPolls.vue'
 import OwnerPoll from '@/views/OwnerPoll.vue'
 import PollsPageView from '../views/PollsPageView.vue'
+import SelectedPoll from '../views/SelectedPoll.vue'
 import UserLogin from '../components/UserLogin.vue'
 import AddQuestions from '../components/AddQuestions.vue'
 import UserPage from '../views/UserPage.vue'
@@ -35,6 +36,12 @@ const routes = [
     path: '/ownerpoll',
     name: 'ownerpoll',
     component: OwnerPoll
+  },
+  { 
+    path: '/selectedpoll/:pollId/',
+    name: 'selectedpoll',
+    component: SelectedPoll,
+    props: true
   },
   { 
     path: '/addquestions',

@@ -1,13 +1,15 @@
 <template>
     <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" app>
             <h2>Welcome {{ userInfo.username }}!</h2>
-        <v-card
+            <v-switch label="switch to public to complete a poll" @click="listPublic = true" v-if="listPublic" text></v-switch><router-link to="/"></router-link>
+        <v-card 
                 class="mx-auto"
                 tile
                 width="100%"
                 >
                 <v-list
                 two-line>
+                <v-subheader>YOUR POLLS</v-subheader>
                 <v-list-item-group
             v-model="selected"
             >
@@ -57,6 +59,7 @@ import cookies from 'vue-cookies'
                 toggleDisable3: false,
                 toggleDisable4: false,
                 toggleClass: true,
+                listPublic: false
             }
         },
         methods: {

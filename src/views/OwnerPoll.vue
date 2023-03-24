@@ -1,6 +1,7 @@
 <template>
 <v-app>
         <UserPollsList/>
+        
         <!-- <PollSelect/> -->
    </v-app>
 </template>

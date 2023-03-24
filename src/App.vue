@@ -1,6 +1,6 @@
 <template>
      <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" >
-      <v-app-bar class="black">
+      <v-tool-bar bottom class="black">
         <div v-if="!isLoggedIn()">
                     <v-btn small color="whitesmoke" class="text-decoration-none" >
                         <router-link class="text-decoration-none" to="/userpage" >
@@ -25,10 +25,10 @@
                 <div v-else>
                     <DropDown/>
                 </div>
-      </v-app-bar>
-    
-        <HeaderComp/>
-      
+            </v-tool-bar>
+            <section height="20vh">
+            <HeaderComp/>
+            </section>
         <v-main>
         <v-container fluid>
           <router-view></router-view>

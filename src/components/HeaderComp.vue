@@ -1,5 +1,6 @@
 <template>
     <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
+        <v-container>
         <div v-if="!isLoggedIn()">
                             <v-card class="mx-auto" color="black"
                         ><v-row justify="center" class="my-4 text-center">
@@ -11,16 +12,17 @@
     </div>
     <div class="black" v-else>
                     <v-card color="black"
-                        :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" max-width="400"
+
                             class="mx-auto">
-                            <router-link class="black" max-width="400" max-height="200" to="/"><v-img src="../assets/banner.png"
+                            <router-link class="black" aspect-ratio max-width="400" max-height="200" to="/"><v-img src="../assets/banner.png"
                                 alt="logo"></v-img>
                             </router-link>
                             <router-link class="black" max-width="400" to="/" style="text-decoration:none"><h1>Thought-shots.</h1></router-link>
                             
                     </v-card>
     </div>
-        </div>
+    </v-container>
+</div>
 </template>
 
 <script>

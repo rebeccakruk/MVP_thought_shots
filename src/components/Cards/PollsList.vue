@@ -16,21 +16,13 @@
             :key="poll.pollId"
             >
             <v-list-item-content>
-                <v-list-item-title >{{ poll.title }}</v-list-item-title>
                 <router-link class="text-decoration-none"
-                :to="'/selectedpoll/' + poll.pollId"></router-link>
+                    :to="'/selectedpoll/' + poll.pollId"><v-list-item-title >{{ poll.title }}</v-list-item-title>
+            </router-link>
             </v-list-item-content>
             </v-list-item>
         </v-list-item-group>
         </v-list>
-        <!-- <v-card :key="date.createdAt"
-                            :catId="date.createdAt"
-                            class="pa-2"
-                            outlined
-                            red
-                            tile v-for="date in allPolls.filter(({ createdAt }) => !uniqueValue[createdAt] && (uniqueValue[createdAt] = true))"
-                            >
-            </v-card> -->
     </v-card>
     <!-- <v-switch
         v-model="viewByCat"

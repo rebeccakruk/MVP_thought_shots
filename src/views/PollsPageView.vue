@@ -5,21 +5,21 @@
             <h2>{{ pollInfo.title }}</h2>
             <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
             <PollEdit v-if="isEditing" v-bind:pollInfo="pollInfo"/>
-            <TakePoll v-bind:pollInfo="pollInfo"/>
+            <!-- <TakePoll v-bind:pollInfo="pollInfo"/> -->
             <v-btn @click="getQandAs">try it out!</v-btn>
         </v-card>
         
 </div>
 </template>
 <script>
-import TakePoll from '@/components/TakePoll.vue';
+// import TakePoll from '@/components/TakePoll.vue';
 import PollEdit from '@/components/EditPoll.vue'
 import axios from 'axios';
 import cookies from 'vue-cookies';
     export default {
     name: "PollsPageView",
     components: {
-    TakePoll,
+    // TakePoll,
     PollEdit
 },
     data() {
