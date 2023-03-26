@@ -2,6 +2,8 @@
     <div>
         <h2>Poll ID # {{ $route.params.pollId }}</h2>
         <TakePoll v-bind:pollInfo="pollInfo" />
+                    <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
+    <v-btn @click="getQandAs()"></v-btn>
     </div>
 </template>
 
@@ -18,6 +20,7 @@ import cookies from 'vue-cookies';
         return {
             pollInfo: [],
             token: "",
+            user_id: ""
         }
     },
     methods: {
@@ -40,7 +43,7 @@ import cookies from 'vue-cookies';
         //     });
             getQandAs() {
             axios.request({
-                url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-user`,
+                url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-response-user`,
                 method: "GET",
                 params: {
                     pollId: this.$route.params.pollId,
@@ -49,16 +52,19 @@ import cookies from 'vue-cookies';
             }).then((response) => {
                 this.pollInfo = response.data
                 console.log(this.pollInfo);
+                console.log(response.data[0].answers[0].responseOption);
             }).catch((error) => {
                 console.log(error);
             })
         },
         beforeMount() {
             this.token = cookies.get('token')
-            // this.poll_id = cookies.get('pollId')
+            this.user_id = cookies.get('userId')
         },
         mounted() {
         this.getQandAs();
+        console.log(this.user_id);
+        console.log(this.token);
     },
 
     }

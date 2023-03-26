@@ -9,10 +9,10 @@
             <v-list-item-group
             color="primary"
             >
-            Hello
+            {{this.pollInfo[0].title}}
             <!-- new question in the poll -->
             <v-list-item
-                v-for="question in pollInfo" :key="question.questionId"  
+                v-for="question in this.pollInfo" :key="question.questionId"  
                 >
                 <v-list-item-icon>
                 <v-icon
@@ -26,16 +26,15 @@
                     v-for="answer in question.answers"
                     :key="answer.answerId"
                     v-model="selected"
-                    @click="userSelection(question.questionId, answer.answerId)"
+                    @click="add_selection(question.questionId, answer.answerId)"
                     >
                     {{ answer.responseOption }}
                 </v-list-item>
-            
                 </v-list-item-content>
             </v-list-item>
             </v-list-item-group>
         </v-list>
-        <v-btn @click="submitPoll">Submit Poll</v-btn>
+<v-btn @click="submitPoll()" >Submit</v-btn>
         </v-card>
     </div>
 
@@ -43,40 +42,64 @@
 
 <script>
 import axios from 'axios';
-
+import cookies from 'vue-cookies';
     export default {
         name : "TakePoll",
         props: {
         pollInfo: Array,
+        
         },
         data() {
             return {
                 selected: [],
-                answerBank: [{}]
+                responses: [],
+                userId: "",
+                pollSubmission: [],
             }
                 },
                 methods: {
-                    userSelection(questionId, answerId) { 
-                        console.log(answerId, 'answerId');
-                        this.answerBank.push({answerId, questionId})
-                        console.log(questionId, 'questionId');
-                        console.log(this.selected, 'selected');
-                        console.log(this.answerBank, 'answerbank', this.answerBank);
-                    }, 
-                    submitPoll() {
-                        axios.post(
-                            process.env.VUE_APP_BASE_DOMAIN + '/api/user',
-                            this.answerBank
-                        ).then((response) => {
-                            console.log(response);
-                        }).catch((error) => {
-                            console.log(error);
-                        })
-                                    
-                                }
+                    add_selection(questionId, answerId) { 
+                        this.response = {
+                            answerId: answerId,
+                            questionId: questionId,
+                            userId: this.userId
+                        }
+                        this.responses.push(this.response)
+                        
+                        console.log(this.responses, 'response');
+                        
+                    },
+    submitPoll() {
+            this.pollSubmission = JSON.stringify(this.responses)
+            console.log(this.pollSubmission);
+            axios.request({
+                url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-response-user`,
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                    },
+                data: {
+                    "pollSubmission" : this.pollSubmission
+                },
+                
+            }).then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            })
+        },
+
                 // post here
                 // or emit here and manage the cart.
                 // handle cart here
+        },
+        beforeMount () {
+            this.userId = cookies.get('userId');
+            console.log(this.userId);
+        },
+        mounted () {
+            console.log(this.userId);
         }
     }
         
