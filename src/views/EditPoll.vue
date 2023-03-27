@@ -1,6 +1,7 @@
 <template>
     <div :class="{ 'pa-e': $vuetify.breakpoint.smAndUp }">
         <v-container>
+            Poll ID # {{ $route.params.pollId }}
             <v-layout wrap>
                 <v-flex sm12 md6 offset-md3>
                     <v-card elevation="4" light tag="section">
@@ -14,11 +15,12 @@
                         <v-divider></v-divider>
                         <v-card-text>
                             <v-form>
+
                             <v-layout align-center justify-space-between>
                                             <v-text-field
                                                 filled
                                                 label="Title"
-                                                v-model="pollEditData.title"
+                                                v-model="this.title"
                                                 :disabled="!toggleDisable1"
                                             ></v-text-field>
                                                     <v-icon flat :color="toggleDisable1 ? 'primary' : ' '"
@@ -39,20 +41,20 @@
                                                 filled
                                                 label="Question"
                                                 v-model="pollEditData.question"
-                                                :disabled="!toggleDisable1"
+                                                :disabled="!toggleDisable3"
                                             ></v-text-field>
-                                                    <v-icon flat :color="toggleDisable1 ? 'primary' : ' '"
-                                                @click="toggleDisable1 = !toggleDisable1">mdi-pencil</v-icon>
+                                                    <v-icon flat :color="toggleDisable3 ? 'primary' : ' '"
+                                                @click="toggleDisable3 = !toggleDisable3">mdi-pencil</v-icon>
                             </v-layout>
                             <v-layout align-center justify-space-between>
-                                            <v-text-area
+                                            <v-text-field
                                                 filled
                                                 label="Response Option"
                                                 v-model="pollEditData.responseOption"
-                                                :disabled="!toggleDisable2"
-                                            ></v-text-area>
-                                                    <v-icon flat :color="toggleDisable2 ? 'primary' : ' '"
-                                                @click="toggleDisable2 = !toggleDisable2">mdi-pencil</v-icon>
+                                                :disabled="!toggleDisable4"
+                                            ></v-text-field>
+                                                    <v-icon flat :color="toggleDisable4 ? 'primary' : ' '"
+                                                @click="toggleDisable4 = !toggleDisable4">mdi-pencil</v-icon>
                             </v-layout>
                             </v-form>
                         </v-card-text>
@@ -103,6 +105,7 @@ import router from '@/router';
                     url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-owner`,
                     method: "GET",
                             params: {
+                                pollId: this.$route.params.pollId,
                                 "token": this.token
                                 }
             }).then((response) => {
@@ -135,6 +138,7 @@ import router from '@/router';
             this.pollEditData = this.description;
             this.pollEditData = this.expiry;
             this.pollEditData - this.token;
+            console.log(this.pollEditData);
         },
     }
 </script>

@@ -1,12 +1,11 @@
 <template>
     <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" >
+        <h2>Complete Poll</h2>
     <v-card
         tile
         >
-        <v-list dense
-        class="grid"
+        <v-list
         >
-            <h4>Complete Poll</h4>
             <v-list-item-group
             color="primary"
             >
@@ -24,19 +23,22 @@
                 <v-list-item-content>
                     
                     <v-list-item
-                    justify-right
+                    height="20vh"
+                    max-width="30%"
                     v-for="answer in question.answers"
                     :key="answer.answerId"
-                    v-model="selected" clearable placeholder
+                    v-model="selected" clearable
                     @click="add_selection(question.questionId, answer.answerId)"
                     >
                     {{ answer.responseOption }}
                 </v-list-item>
-                <v-btn @click="submitPoll()" >Submit</v-btn>
                 </v-list-item-content>
             </v-list-item>
             </v-list-item-group>
         </v-list>
+        <v-card-actions>
+            <v-btn @click="submitPoll()" >Submit</v-btn>
+        </v-card-actions>
         </v-card>
     </div>
 
@@ -54,7 +56,6 @@ import cookies from 'vue-cookies';
         data() {
             return {
                 selected: [],
-                lockSelection: false,
                 responses: [],
                 pollSubmission: [],
                 userId: ""
@@ -62,7 +63,6 @@ import cookies from 'vue-cookies';
                 },
                 methods: {
                     add_selection(questionId, answerId) { 
-                        this.lockSelection = !this.lockSelection
                         this.response = {
                             answerId: answerId,
                             questionId: questionId,
@@ -76,9 +76,6 @@ import cookies from 'vue-cookies';
     submitPoll() {
             this.pollSubmission = JSON.stringify(this.responses)
             console.log(this.pollSubmission);
-            // let userId = cookies.get('userId')
-            // userId = JSON.stringify(this.userId)
-            // console.log(userId);
             axios.request({
                 url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-response-user`,
                 method: "POST",
@@ -88,7 +85,6 @@ import cookies from 'vue-cookies';
                     },
                 data: {
                     "pollSubmission" : this.pollSubmission,
-                    // "userId" : this.userId
                 },
                 
             }).then((response) => {
@@ -97,11 +93,7 @@ import cookies from 'vue-cookies';
                 console.log(error);
             })
         },
-
-                // post here
-                // or emit here and manage the cart.
-                // handle cart here
-        },
+    },
         beforeMount () {
             this.userId = cookies.get('userId');
             console.log(this.userId);
@@ -114,9 +106,5 @@ import cookies from 'vue-cookies';
 </script>
 
 <style scoped>
-.grid {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    text-align: left;
-}
- </style>
+
+</style>

@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <h2>Poll ID # {{ $route.params.pollId }}</h2><span>{{ this.pollInfo.title }}</span>
+    <div div :class="{ 'pa-e': $vuetify.breakpoint.smAndUp }">
+        <v-card-actions @click="getQandAs()">
+            <h2>
+            Poll ID # 
+            {{ $route.params.pollId }}
+        </h2></v-card-actions>
+        <span >{{ this.pollInfo.title }}</span>        
         <TakePoll v-bind:pollInfo="pollInfo" />
-                    <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
-    <v-btn @click="getQandAs()">See all polls</v-btn>
     </div>
 </template>
 

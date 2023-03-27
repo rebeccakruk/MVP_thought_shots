@@ -40,7 +40,7 @@ import router from '@/router';
                     },
                     {
                         title: "my polls",
-                        url: "/editpoll"
+                        url: "/ownerpoll"
                     },
                     { 
                         title: "logout",

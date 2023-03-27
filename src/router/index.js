@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainView from '../views/MainView.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
-import MyPolls from '../views/MyPolls.vue'
+import NewPoll from '../views/NewPoll.vue'
 import OwnerPoll from '@/views/OwnerPoll.vue'
 import PollsPageView from '../views/PollsPageView.vue'
 import SelectedPoll from '../views/SelectedPoll.vue'
@@ -11,7 +11,7 @@ import AddQuestions from '../components/AddQuestions.vue'
 import UserPage from '../views/UserPage.vue'
 import UserLogout from '../components/UserLogout.vue'
 import UserSignup from '../components/UserSignup.vue'
-import EditPoll from '../components/EditPoll.vue'
+import EditPoll from '../views/EditPoll.vue'
 import UserEdit from '../components/UserEdit.vue'
 
 Vue.use(VueRouter)
@@ -28,12 +28,12 @@ const routes = [
     component: UserPage
   },
   { 
-    path: '/mypolls',
-    name: 'mypolls',
-    component: MyPolls
+    path: '/newpoll',
+    name: 'newpoll',
+    component: NewPoll
   },
   { 
-    path: '/ownerpoll',
+    path: '/ownerpoll/',
     name: 'ownerpoll',
     component: OwnerPoll
   },
@@ -74,9 +74,10 @@ const routes = [
     component : UserEdit
   },
   {
-    path: '/editpoll',
+    path: '/editpoll/:pollId/',
     name: 'editpoll',
-    component : EditPoll
+    component : EditPoll,
+    props: true
   },
   {
     path: '/:catchAll(.*)*',

@@ -7,9 +7,6 @@
                 </v-container>
             </div>
             <nav>
-                <v-container v-if="isLoggedIn()">
-                    <!-- <UserPollsList /> -->
-                </v-container>
                 <router-view />
                 <CreatePolls />
                 <PollsList/>
@@ -19,18 +16,13 @@
 </template>
 
 <script>
-// import UserPollsList from '../components/UserPollsList.vue';
-import CreatePolls from '../components/Cards/CreatePolls.vue';
-import PollsList from '@/components/Cards/PollsList.vue';
-// import HeaderComp from '@/components/HeaderComp.vue';
-
+import CreatePolls from '../components/CreatePolls.vue';
+import PollsList from '@/components/PollsList.vue';
 import cookies from 'vue-cookies';
 
     export default {
     name: "MainView",
     components: {
-        // HeaderComp,
-        // UserPollsList,
         PollsList,
         CreatePolls
 },

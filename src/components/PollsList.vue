@@ -1,10 +1,10 @@
 <template>
     <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" class="pollList">
         <v-card
-        class="mx-auto"
-        width="100%"
-        tile
-    >
+            class="mx-auto"
+            width="100%"
+            tile
+        >
         <v-list >
         <v-subheader>Polls</v-subheader>
         <v-list-item-group
@@ -68,13 +68,10 @@
 
 <script>
 import axios from 'axios';
-// import cookies from 'vue-cookies';
     export default {
         name: "PollsList",
         data() {
             return {
-                // uniqueValue: {},
-                // viewByCat: false,
                 selectedItem: [],
                 allPolls: [
                     {
@@ -103,35 +100,10 @@ import axios from 'axios';
             })
         }
     },
-    // sortArray() {
-        
-    //     let createDate = this.allPolls.createdAt
-    //     for(let i = 0; i < createDate.length; i++)
-    //     createDate = createDate.sort()
-    // },
-        // seeAll() {
-        //     axios.request({
-        //         url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll`,
-        //         method: "GET",
-        //         params: {
-        //             "categoryName" : this.categoryName
-        //         }
-        //     }).then((response) => {
-        //         this.myPolls = response.data
-        //     }).catch((error) => {
-        //         console.log(error);
-        //     })
-        //         }
-        //     },
-            beforeMount() {
-                this.getPolls();
-                        },
-            mounted () {
-                // this.sortArray();
-            // console.log(this.token);
-            // this.seeAll();
-                    }
-}
+        beforeMount() {
+            this.getPolls();
+        },
+    }
 
 </script>
 

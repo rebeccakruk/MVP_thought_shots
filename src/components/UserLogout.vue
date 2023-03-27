@@ -8,7 +8,9 @@
                                 </router-link>
                                 <router-link to="/" style="text-decoration:none"><h1>Thought-shots.</h1></router-link>
                             </v-card>
-                            <v-btn max-width="100" @click="logout()">Logout</v-btn>
+                            <v-container>
+                                <v-btn max-width="100" @click="logout()">Logout</v-btn>
+                            </v-container>
         
 
     </div>

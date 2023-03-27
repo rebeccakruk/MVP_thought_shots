@@ -1,10 +1,10 @@
 <template>
-    <div id="app">
+    <div >
         <v-card>
             <h2>Poll ID # {{ $route.params.pollId }}</h2>
             <h2>{{ pollInfo.title }}</h2>
             <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
-            <PollEdit v-if="isEditing" v-bind:pollInfo="pollInfo"/>
+            <!-- <PollEdit v-if="isEditing" v-bind:pollInfo="pollInfo"/> -->
             <!-- <TakePoll v-bind:pollInfo="pollInfo"/> -->
             <v-btn @click="getQandAs">try it out!</v-btn>
         </v-card>
@@ -13,14 +13,14 @@
 </template>
 <script>
 // import TakePoll from '@/components/TakePoll.vue';
-import PollEdit from '@/components/EditPoll.vue'
+// import PollEdit from '@/components/EditPoll.vue'
 import axios from 'axios';
 import cookies from 'vue-cookies';
     export default {
     name: "PollsPageView",
     components: {
     // TakePoll,
-    PollEdit
+    // PollEdit
 },
     data() {
         return {

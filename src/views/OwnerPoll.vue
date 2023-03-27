@@ -1,20 +1,33 @@
 <template>
-<v-app>
+    <div :class="{ 'pa-e': $vuetify.breakpoint.smAndUp }">
+        <h2> {{ $route.params.pollId }}</h2>
         <UserPollsList/>
+      
+        <v-btn @click="edit()">Edit</v-btn>
+        <EditPoll/>
         
-        <!-- <PollSelect/> -->
-   </v-app>
+    </div>
 </template>
 
 <script>
+import router from '@/router';
 import UserPollsList from '@/components/UserPollsList.vue';
-// import PollSelect from '@/components/Cards/PollSelect.vue';
+import EditPoll from '@/views/EditPoll.vue';
     export default {
         name: "OwnerPoll",
         components : {
-            // PollSelect,
-            UserPollsList
-        }      
+            UserPollsList,
+            EditPoll
+    },
+methods: {
+    edit() {
+        router.push('/editpoll/' + this.UserPollsList.pollId)
+        console.log(this.UserPollsList.pollId);
+    }
+},
+mounted () {
+    
+},
     }
 </script>
 

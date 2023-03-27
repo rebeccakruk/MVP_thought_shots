@@ -1,6 +1,10 @@
 <template>
 <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" >
-    <v-card>
+    <v-card 
+        class="mx-auto"
+        width="100%"
+        tile
+        >
     <v-toolbar
         flat
         color="black"
@@ -38,7 +42,6 @@
                 >
                 Next
             </v-btn>
-           
     </v-card-actions>
     </v-card>
 </div>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
         <UserLogin/>
         <UserLogout v-if="isLoggedIn()"/>
     </div>

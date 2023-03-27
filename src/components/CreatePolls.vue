@@ -1,7 +1,7 @@
 <template>
     <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
         <h3></h3>
-        <router-link text-decoration-none to="/mypolls"><v-btn small>Create a poll</v-btn></router-link>
+        <router-link text-decoration-none to="/newpoll"><v-btn small>Create a poll</v-btn></router-link>
         <!-- This will be for future use when categories are established. -->
         <!-- <v-container :key="cat.category"
                 :catId="cat.category"

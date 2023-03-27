@@ -1,5 +1,5 @@
 <template>
-    <v-app :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" id="inspire">
+    <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" >
         <v-container>
             <v-layout wrap>
                 <v-flex sm12 md6 offset-md3>
@@ -34,30 +34,29 @@
                                         label="last name"></v-text-field>
                                     <v-icon flat :color="toggleDisable3 ? 'primary' : ' '"
                                         @click="toggleDisable3 = !toggleDisable3">mdi-pencil</v-icon>
+                            
                                 </v-layout>
-
-
+                                <v-card-actions>
+                                
+                                <v-spacer></v-spacer>
+                              
+                                    <v-btn color="success" @click="patchInfo()">
+                                        <h1>SUBMIT</h1> 
+                                    </v-btn>
+                          
+                            </v-card-actions>
                             </v-form>
                         </v-card-text>
-                        <v-divider></v-divider>
-                        <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
-
-                            <v-spacer></v-spacer>
-                            <router-view to="/">
-                                <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchInfo">
-                                    Submit
-                                </v-btn>
-                            </router-view>
-                        </v-card-actions>
+                            <v-divider></v-divider>
                     </v-card>
-                </v-flex>
-                <v-flex sm12 md6 offset-md3>
-                    <v-layout align-center justify-space-between>
-                    </v-layout>
-                </v-flex>
-            </v-layout>
+                    </v-flex>
+                    <v-flex sm12 md6 offset-md3>
+                        <v-layout align-center justify-space-between>
+                        </v-layout>
+                    </v-flex>
+                </v-layout>
         </v-container>
-    </v-app>
+    </div>
 </template>
 
 <script>
@@ -71,7 +70,6 @@ export default {
     data() {
         return {
             showPassword: false,
-            
             userInfo: [],
             formData: {
                 email: "",
@@ -124,23 +122,10 @@ export default {
     mounted() {
         this.getInfo();
         console.log(this.userInfo.username);
-        console.log('anybody home?');
-        this.formData = this.email;
-        this.formData = this.username;
-        this.formData = this.password;
-        this.formData = this.dob;
-        this.formData = this.firstName;
-        this.formData = this.lastName;
-        this.formData = this.createdAt;
-        this.formData = this.token;
     },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
 
-<!-- please work on frontend and backend in parallel
-a state manager is a function
-in additional helper file, valid when there's a need to kick the user to the main page, not logged in. -->
-<!-- Spend some time while we're thinking about different features. Personas. Imaginary/potential user and how they would use the app -->
-<!-- first do the testing through Postman, and it allows you to check if it's working properly -->
+</style>
