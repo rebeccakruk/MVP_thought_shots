@@ -23,8 +23,6 @@
                 <v-list-item-content>
                     
                     <v-list-item
-                    height="20vh"
-                    max-width="30%"
                     v-for="answer in question.answers"
                     :key="answer.answerId"
                     v-model="selected" clearable

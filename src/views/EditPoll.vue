@@ -6,66 +6,65 @@
                 <v-flex sm12 md6 offset-md3>
                     <v-card elevation="4" light tag="section">
                         <v-card-title>
+                            <h3 class="headline">
+                                Edit {{ this.pollEditData[0].title }}
+                            </h3>
                             <v-layout align-center justify-space-between>
-                                <h3 class="headline">
-                                    Edit {{ pollEditData.title }}
-                                </h3>
                             </v-layout>
                         </v-card-title>
                         <v-divider></v-divider>
                         <v-card-text>
-                            <v-form>
+                            <v-form
+                            v-for="edit in this.pollEditData" :key="edit.questionId"
+                            >
 
                             <v-layout align-center justify-space-between>
                                             <v-text-field
-                                                filled
+                                                
                                                 label="Title"
-                                                v-model="this.title"
+                                                v-model="edit.title"
                                                 :disabled="!toggleDisable1"
                                             ></v-text-field>
                                                     <v-icon flat :color="toggleDisable1 ? 'primary' : ' '"
                                                 @click="toggleDisable1 = !toggleDisable1">mdi-pencil</v-icon>
                             </v-layout>
                             <v-layout align-center justify-space-between>
-                                            <v-text-area
-                                                filled
+                                            <v-text-field
+                                                
                                                 label="Description"
-                                                v-model="pollEditData.description"
+                                                v-model="edit.description"
                                                 :disabled="!toggleDisable2"
-                                            ></v-text-area>
+                                            >{{ edit.description }}</v-text-field>
                                                     <v-icon flat :color="toggleDisable2 ? 'primary' : ' '"
                                                 @click="toggleDisable2 = !toggleDisable2">mdi-pencil</v-icon>
                             </v-layout>
                             <v-layout align-center justify-space-between>
                                             <v-text-field
-                                                filled
-                                                label="Question"
-                                                v-model="pollEditData.question"
+                                                label="question"
+                                                v-model="edit.question"
                                                 :disabled="!toggleDisable3"
-                                            ></v-text-field>
+                                            >{{ edit.question }}</v-text-field>
                                                     <v-icon flat :color="toggleDisable3 ? 'primary' : ' '"
                                                 @click="toggleDisable3 = !toggleDisable3">mdi-pencil</v-icon>
                             </v-layout>
                             <v-layout align-center justify-space-between>
                                             <v-text-field
-                                                filled
                                                 label="Response Option"
-                                                v-model="pollEditData.responseOption"
+                                                v-model="edit.responseOption"
                                                 :disabled="!toggleDisable4"
-                                            ></v-text-field>
+                                            >{{ edit.responseOption }}</v-text-field>
                                                     <v-icon flat :color="toggleDisable4 ? 'primary' : ' '"
                                                 @click="toggleDisable4 = !toggleDisable4">mdi-pencil</v-icon>
                             </v-layout>
                             </v-form>
                         </v-card-text>
                         <v-divider></v-divider>
-                        <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
+                        <v-card-actions >
                         <v-spacer></v-spacer>
-                        <router-view to="/">
-                            <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchPoll">
+                        
+                            <v-btn color="info" @click="patchPoll()">
                                 Submit Change
                             </v-btn>
-                        </router-view>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -91,11 +90,16 @@ import router from '@/router';
                         expiry: "",
                         pollOwner: "",
                         title: "",
+                        pollId: "",
+                        questionId: "",
+                        responseOption: "",
+                        answerId: "",
                         token: ""
                 },
             toggleDisable1: false,
             toggleDisable2: false,
             toggleDisable3: false,
+            toggleDisable4: false,
             toggleClass: true
             }
         },
@@ -110,7 +114,7 @@ import router from '@/router';
                                 }
             }).then((response) => {
                 this.pollEditData = response.data
-                console.log(response.data);
+                console.log(this.pollEditData[0].title);
             }).catch((error) => {
                 console.log(error);
             })
@@ -124,7 +128,7 @@ import router from '@/router';
             }).catch((error) => {
                 console.log(error);
             })
-            router.push('/pollsView')
+            router.push('/')
         }
         },
         beforeMount () {
@@ -137,8 +141,8 @@ import router from '@/router';
             this.pollEditData = this.title;
             this.pollEditData = this.description;
             this.pollEditData = this.expiry;
-            this.pollEditData - this.token;
-            console.log(this.pollEditData);
+            this.pollEditData = this.token;
+    
         },
     }
 </script>
