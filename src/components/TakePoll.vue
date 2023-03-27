@@ -53,8 +53,8 @@ import cookies from 'vue-cookies';
             return {
                 selected: [],
                 responses: [],
-                userId: "",
                 pollSubmission: [],
+                userId: ""
             }
                 },
                 methods: {
@@ -72,6 +72,9 @@ import cookies from 'vue-cookies';
     submitPoll() {
             this.pollSubmission = JSON.stringify(this.responses)
             console.log(this.pollSubmission);
+            // let userId = cookies.get('userId')
+            // userId = JSON.stringify(this.userId)
+            // console.log(userId);
             axios.request({
                 url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-response-user`,
                 method: "POST",
@@ -80,7 +83,8 @@ import cookies from 'vue-cookies';
                     'Accept': 'application/json'
                     },
                 data: {
-                    "pollSubmission" : this.pollSubmission
+                    "pollSubmission" : this.pollSubmission,
+                    // "userId" : this.userId
                 },
                 
             }).then((response) => {
