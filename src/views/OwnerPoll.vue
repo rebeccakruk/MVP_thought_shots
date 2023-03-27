@@ -3,8 +3,8 @@
         <h2> {{ $route.params.pollId }}</h2>
         <UserPollsList/>
       
-        <v-btn @click="edit()">Edit</v-btn>
-        <EditPoll/>
+        <!-- <v-btn @click="edit()">Edit</v-btn> -->
+        <!-- <EditPoll/> -->
         
     </div>
 </template>
@@ -12,12 +12,12 @@
 <script>
 import router from '@/router';
 import UserPollsList from '@/components/UserPollsList.vue';
-import EditPoll from '@/views/EditPoll.vue';
+// import EditPoll from '@/views/EditPoll.vue';
     export default {
         name: "OwnerPoll",
         components : {
             UserPollsList,
-            EditPoll
+            // EditPoll
     },
 methods: {
     edit() {

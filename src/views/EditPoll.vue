@@ -3,6 +3,9 @@
         <v-container>
             Poll ID # {{ $route.params.pollId }}
             <v-layout wrap>
+                <v-btn color="info" @click="deletePoll()">
+                                    Delete poll?
+                                </v-btn>
                 <v-flex sm12 md6 offset-md3>
                     <v-card elevation="4" light tag="section">
                         <v-card-title>
@@ -15,7 +18,7 @@
                         <v-divider></v-divider>
                         <v-card-text>
                             <v-form
-                            v-for="edit in this.pollEditData" :key="edit.questionId"
+                            v-for="edit in this.pollEditData" :key="edit.pollId"
                             >
 
                             <v-layout align-center justify-space-between>
@@ -129,20 +132,28 @@ import router from '@/router';
                 console.log(error);
             })
             router.push('/')
-        }
+        },
+        deletePoll() {
+                axios.request({
+                    url: `${process.env.VUE_APP_BASE_DOMAIN}/api/poll-owner`,
+                    method: "DELETE",
+                    data: {
+                        pollId: this.$route.params.pollId,
+                        "token": this.token
+                    },
+                }).then((response) => {
+                    console.log(response)
+                    router.push('/')
+                }).catch((error) => {
+                    console.log(error);
+                })
+            }
         },
         beforeMount () {
             this.token = cookies.get('token');
         },
         mounted () {
             this.getPoll();
-            this.pollEditData = this.categoryName;
-            this.pollEditData = this.category;
-            this.pollEditData = this.title;
-            this.pollEditData = this.description;
-            this.pollEditData = this.expiry;
-            this.pollEditData = this.token;
-    
         },
     }
 </script>
