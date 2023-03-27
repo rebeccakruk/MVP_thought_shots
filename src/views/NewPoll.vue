@@ -10,7 +10,7 @@
         <v-toolbar-title>Create a poll</v-toolbar-title>
     </v-toolbar>
 
-    <v-card-text>
+    <v-card-text v-if="isLoggedIn()">
 
         <v-text-field
         filled
@@ -25,12 +25,12 @@
         ></v-textarea>
 
         </v-card-text>
-
-    <v-divider></v-divider>
+        <div v-else justify-center><h3>You must be logged in to create a poll.</h3></div>
 
 <v-card-actions text-decoration-none>
         <v-spacer></v-spacer>
             <v-btn 
+                v-if="isLoggedIn()"
                 @click="new_poll()"
                 color="success"
                 depressed
@@ -38,6 +38,7 @@
                 >
                 Next
             </v-btn>
+           
     </v-card-actions>
     </v-card>
 </div>
@@ -49,7 +50,7 @@ import axios from 'axios';
 import cookies from 'vue-cookies';
 
     export default {
-        name: "MyPolls",
+        name: "NewPoll",
         data() {
             return {
                 newPoll: [],

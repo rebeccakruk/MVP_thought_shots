@@ -1,5 +1,5 @@
 <template>
-        <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+        <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
         <v-card
             class="overflow-y-auto"
             tile
@@ -36,7 +36,7 @@
                 </v-list-item>
                 </v-list-item-group>
             </v-list>
-            <v-btn @click="submitPoll">Submit Poll</v-btn>
+            <v-btn @click="submitPoll">Submit Changes</v-btn>
             </v-card>
         </div>
 </template>
@@ -82,10 +82,12 @@ export default {
             }).catch((error) => {
                 console.log(error);
             })
-        // post here
-        // or emit here and manage the cart.
-        // handle cart here
-    }}}
+        }
+    },
+    mounted () {
+        ;
+    },
+}
         
 </script>
 

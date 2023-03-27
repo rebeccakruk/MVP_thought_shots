@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h2>Poll ID # {{ $route.params.pollId }}</h2>
+        <h2>Poll ID # {{ $route.params.pollId }}</h2><span>{{ this.pollInfo.title }}</span>
         <TakePoll v-bind:pollInfo="pollInfo" />
                     <!-- <TakePoll v-for="question in pollInfo" :key="question.questionId" v-bind:pollInfo="question" :title="poll.title" :question="poll.question" :responseOption="poll.responseOption"/> -->
-    <v-btn @click="getQandAs()"></v-btn>
+    <v-btn @click="getQandAs()">See all polls</v-btn>
     </div>
 </template>
 

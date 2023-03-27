@@ -40,16 +40,16 @@ import router from '@/router';
                     },
                     {
                         title: "my polls",
-                        url: "/myPolls"
+                        url: "/editpoll"
                     },
                     { 
                         title: "logout",
                         url: "/logout"
                     },
-                    { 
-                        title: "change password",
-                        url: "/"
-                    },
+                    // { 
+                    //     title: "change password",
+                    //     url: "/"
+                    // },
             ]
             }
         },

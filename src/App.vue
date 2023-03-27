@@ -17,7 +17,7 @@
                         class="text-decoration-none">
                             <router-link
                                 class="text-decoration-none"
-                                to="/userpage">
+                                to="/register">
                                 Sign up
                             </router-link>
                     </v-btn>

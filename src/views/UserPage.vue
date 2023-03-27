@@ -13,9 +13,9 @@ import cookies from 'vue-cookies';
 export default {
         name: "UserPage",
         components: {
-            UserLogin,
-            UserLogout,
-        },
+    UserLogin,
+    UserLogout,
+},
         methods: {
             isLoggedIn() {
         let user = cookies.get('token')

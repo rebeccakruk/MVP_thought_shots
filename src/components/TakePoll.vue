@@ -4,6 +4,7 @@
         tile
         >
         <v-list dense
+        class="grid"
         >
             <h4>Complete Poll</h4>
             <v-list-item-group
@@ -23,18 +24,19 @@
                 <v-list-item-content>
                     
                     <v-list-item
+                    justify-right
                     v-for="answer in question.answers"
                     :key="answer.answerId"
-                    v-model="selected"
+                    v-model="selected" clearable placeholder
                     @click="add_selection(question.questionId, answer.answerId)"
                     >
                     {{ answer.responseOption }}
                 </v-list-item>
+                <v-btn @click="submitPoll()" >Submit</v-btn>
                 </v-list-item-content>
             </v-list-item>
             </v-list-item-group>
         </v-list>
-<v-btn @click="submitPoll()" >Submit</v-btn>
         </v-card>
     </div>
 
@@ -52,6 +54,7 @@ import cookies from 'vue-cookies';
         data() {
             return {
                 selected: [],
+                lockSelection: false,
                 responses: [],
                 pollSubmission: [],
                 userId: ""
@@ -59,6 +62,7 @@ import cookies from 'vue-cookies';
                 },
                 methods: {
                     add_selection(questionId, answerId) { 
+                        this.lockSelection = !this.lockSelection
                         this.response = {
                             answerId: answerId,
                             questionId: questionId,
@@ -110,5 +114,9 @@ import cookies from 'vue-cookies';
 </script>
 
 <style scoped>
-
-</style>
+.grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    text-align: left;
+}
+ </style>

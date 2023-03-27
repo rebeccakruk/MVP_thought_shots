@@ -1,37 +1,36 @@
 <template>
     <div :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }" app>
             <h2>Welcome {{ userInfo.username }}!</h2>
-            <v-switch label="switch to public to complete a poll" @click="listPublic = true" v-if="listPublic" text></v-switch><router-link to="/"></router-link>
+                <v-btn text-decoration="none" label="switch to public to complete a poll" @click="listPublic = true" v-if="listPublic" text></v-btn><router-link text-decoration="none" to="/">Go to polls</router-link>
         <v-card 
-                class="mx-auto"
-                tile
-                width="100%"
-                >
-                <v-list
-                two-line>
-                <v-subheader>YOUR POLLS</v-subheader>
-                <v-list-item-group
-            v-model="selected"
+            class="mx-auto"
+            tile
+            width="100%"
             >
-                <v-list-item v-for="mine in minePolls" 
-                :key="mine.pollId" 
-                v-bind:mine="mine">
-    <v-list-item-content>
-        <v-list-item-title  
-        v-text="mine.title"
-
-        @click="goToPoll(mine.pollId)">
-                        </v-list-item-title>
-        <v-list-item-subtitle 
-        v-text="mine.description">  
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
-      </v-list-item-group>
-    </v-list>
-       
+                <v-list
+                    two-line>
+                        <v-subheader>
+                            YOUR POLLS
+                        </v-subheader>
+                <v-list-item-group
+                    v-model="selected"
+                    >
+                    <v-list-item v-for="mine in minePolls" 
+                            :key="mine.pollId" 
+                            v-bind:mine="mine">
+                        <v-list-item-content>
+                            <v-list-item-title  
+                                v-text="mine.title"
+                                @click="goToPoll(mine.pollId)">
+                            </v-list-item-title>
+                                <v-list-item-subtitle 
+                                    v-text="mine.description">  
+                                </v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-item-group>
+            </v-list>
         </v-card>
-
     </div>
 </template>
 
@@ -47,8 +46,6 @@ import cookies from 'vue-cookies'
 },
         data() {
             return {
-            showPassword: false,
-            darkTheme: true,
                 userInfo : [],
                 minePolls: [],
                 selected: [],
@@ -77,8 +74,6 @@ import cookies from 'vue-cookies'
                     console.log(response.data)
                 }).catch((error) => {
                     console.log(error);
-                }).finally(() =>{
-                    console.log('here we are. not logged in.');
                 })
             },
             getMyPolls() {
@@ -90,22 +85,22 @@ import cookies from 'vue-cookies'
                     params: {
                         "token": userToken
                     }
-            }).then((response) => {
+                }).then((response) => {
                 this.minePolls = response.data
                 console.log(response.data);
-            }).catch((error) => {
+                }).catch((error) => {
                 console.log(error);
-            }).finally(() => {
-                console.log('no polls here');
-            })
-        },
-        goToPoll(pollId) {
-            console.log(pollId, 'pollId');
-            this.selected.push( pollId );
-            this.selectedThisPole();
-            console.log(this.selected, 'selected');
-        },
-        selectedThisPole() {
+                }).finally(() => {
+                console.log('no owner polls');
+                })
+            },
+            goToPoll(pollId) {
+                console.log(pollId, 'pollId');
+                this.selected.push( pollId );
+                this.selectedThisPole();
+                console.log(this.selected, 'selected');
+            },
+            selectedThisPole() {
                 this.poll_id = this.selected.pop()
                 let userToken = cookies.get('token')
                 console.log(userToken, this.poll_id);
@@ -120,15 +115,14 @@ import cookies from 'vue-cookies'
                     let pollId = response.data[0].pollId
                     pollId = cookies.set('pollId', pollId)
                     console.log(pollId, 'pollId');
-                    router.go()
+                    router.$go()
                 }).catch((error) => {
                     console.log(error);
                 }).finally(() => {
                     console.log('no polls here');
                 })
-        }
-    
-    },
+            }
+        },
         mounted () {
             this.getMyInfo();
             this.getMyPolls();
@@ -141,9 +135,3 @@ import cookies from 'vue-cookies'
 
 
 </style>
-
-<!-- please work on frontend and backend in parallel
-a state manager is a function
-in additional helper file, valid when there's a need to kick the user to the main page, not logged in. -->
-<!-- Spend some time while we're thinking about different features. Personas. Imaginary/potential user and how they would use the app -->
-<!-- first do the testing through Postman, and it allows you to check if it's working properly -->

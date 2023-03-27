@@ -135,7 +135,7 @@ export default {
                         cookies.set('token', token)
                         cookies.set('userId', id)
                         this.$emit('refresh')
-                        router.push('/')
+                        router.push('/ownerpoll')
                     }).catch((error) => {
                         console.log(error);
                     })
@@ -146,16 +146,9 @@ export default {
 </script>
 
 <style scoped>
-.black {
-    background-color: black;
-    color: whitesmoke;
-}
-.dark_grey {
-    background-color: rgba(250, 250, 242, 0.192);
-}
 
-.dark {
-    background-color: rgb(250, 250, 242);
-}
+
+
+
 
 </style>

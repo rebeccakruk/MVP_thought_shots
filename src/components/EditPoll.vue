@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ 'pa-e': $vuetify.breakpoint.smAndUp }" :dark="darkTheme" id="inspire">
+    <div :class="{ 'pa-e': $vuetify.breakpoint.smAndUp }">
         <v-container>
             <v-layout wrap>
                 <v-flex sm12 md6 offset-md3>
@@ -61,7 +61,7 @@
                         <v-spacer></v-spacer>
                         <router-view to="/">
                             <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" @click="patchPoll">
-                                Submit
+                                Submit Change
                             </v-btn>
                         </router-view>
                         </v-card-actions>
@@ -113,11 +113,9 @@ import router from '@/router';
             })
         },
         patchPoll() {
-            let token = cookies.get('token')
-            console.log(token);
             axios.patch(
                 process.env.VUE_APP_BASE_DOMAIN + '/api/poll-owner',
-                this.patchInfo, this.token
+                this.patchInfo
             ).then((response) => {
                 console.log(response);
             }).catch((error) => {

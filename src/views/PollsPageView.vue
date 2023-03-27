@@ -26,7 +26,7 @@ import cookies from 'vue-cookies';
         return {
             uniqueValue: {},
             pollInfo: [],
-            isEditing: true
+            isEditing: false
                 // pollInfo:{
                 //     title: "",
                 //     responseId: [],
